@@ -4,7 +4,7 @@
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QPushButton>
-
+#include <QListWidget>
 
 Homepage::Homepage(QWidget *parent) :
     QWidget(parent)
@@ -33,8 +33,10 @@ Homepage::Homepage(QWidget *parent) :
     buttonLayout->addWidget(searchButton);
     wineGroup->setLayout(buttonLayout);
 
+    QListWidget *listing = new QListWidget();
     QGridLayout *mainLayout = new QGridLayout;
     mainLayout->addWidget(wineGroup, 0, 0, 1, 2);
+    mainLayout->addWidget(listing, 1, 0, 1, 2);
 
     setLayout(mainLayout);
 
