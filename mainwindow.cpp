@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "pages.h"
+#include "homepage.h"
 #include <QVBoxLayout>
 #include <QKeySequence>
 #include <QMessageBox>
@@ -24,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     pagesWidget = new QStackedWidget;
+    pagesWidget->addWidget(new Homepage);
     pagesWidget->addWidget(new ConfigurationPage);
     pagesWidget->addWidget(new UpdatePage);
     pagesWidget->addWidget(new QueryPage);

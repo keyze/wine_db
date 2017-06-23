@@ -4,10 +4,12 @@
 #include <QObject>
 #include <QWidget>
 
-class homepage
+class Homepage : public QWidget
 {
+    Q_OBJECT
+
 public:
-    homepage();
+    Homepage(QWidget *parent = 0);
 };
 
 #endif // HOMEPAGE_H
