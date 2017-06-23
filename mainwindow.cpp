@@ -24,12 +24,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget *bottomFiller = new QWidget;
     bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+    QWidget *fakePage = new QWidget;
     pagesWidget = new QStackedWidget;
+    //something is buggering up the indexing so throwing in a fakepage at index 0 and adding the real one at index 1
+    pagesWidget->addWidget(fakePage);
     pagesWidget->addWidget(new Homepage);
     pagesWidget->addWidget(new ConfigurationPage);
     pagesWidget->addWidget(new UpdatePage);
     pagesWidget->addWidget(new QueryPage);
 
+    // index 1 is the real first page
+
+    pagesWidget->setCurrentIndex(1);
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setMargin(5);
     layout->addWidget(pagesWidget);
@@ -38,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(bottomFiller);
     widget->setLayout(layout);
 
+    menuBar()->setNativeMenuBar(false);
     createActions();
     createMenus();
 
@@ -45,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
     statusBar()->showMessage(message);
 
 
-    setWindowTitle(tr("Menus"));
+    setWindowTitle(tr("Johnnys Wine Database!"));
     setMinimumSize(160, 160);
     resize(480, 320);
 }
@@ -253,6 +260,7 @@ void MainWindow::open()
 void MainWindow::print()
 {
     infoLabel->setText(tr("Invoked <b>File|Print</b>"));
+    changePage(0);
 }
 
 void MainWindow::undo()
