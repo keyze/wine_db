@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = sandbox
 TEMPLATE = app
-
+RCC_DIR = pictures
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -27,12 +27,17 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     pages.cpp \
-    homepage.cpp
+    homepage.cpp \
+    borderlayout.cpp
 
 HEADERS += \
         mainwindow.h \
     pages.h \
-    homepage.h
+    homepage.h \
+    borderlayout.h
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

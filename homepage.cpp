@@ -1,10 +1,12 @@
 #include "homepage.h"
-
+#include "borderlayout.h"
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QPushButton>
-#include <QListWidget>
+#include <QTextEdit>
+#include <QLabel>
+#include <QPixmap>
 
 Homepage::Homepage(QWidget *parent) :
     QWidget(parent)
@@ -23,21 +25,61 @@ Homepage::Homepage(QWidget *parent) :
 
     this->setStyleSheet(styleSheet);
 
-    QPushButton *addButton = new QPushButton(tr("Add Wine"));
-    QPushButton *removeButton = new QPushButton(tr("Remove Wine"));
-    QPushButton *searchButton = new QPushButton(tr("Search Wine"));
+    QFont buttonFont;
+    buttonFont.setBold(true);
+    buttonFont.setPixelSize(50);
 
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    QPushButton *addButton = new QPushButton(tr("Add Wine"));
+    addButton->setFont(buttonFont);
+    QPushButton *removeButton = new QPushButton(tr("Remove Wine"));
+    removeButton->setFont(buttonFont);
+    QPushButton *searchButton = new QPushButton(tr("Search Wine"));
+    searchButton->setFont(buttonFont);
+
+    addButton->setFixedHeight(200);
+    addButton->setFixedWidth(1100);
+
+    removeButton->setFixedHeight(200);
+    removeButton->setFixedWidth(1100);
+
+    searchButton->setFixedHeight(200);
+    searchButton->setFixedWidth(1100);
+
+    QVBoxLayout *buttonLayout = new QVBoxLayout;
     buttonLayout->addWidget(addButton);
     buttonLayout->addWidget(removeButton);
     buttonLayout->addWidget(searchButton);
     wineGroup->setLayout(buttonLayout);
 
-    QListWidget *listing = new QListWidget();
-    QGridLayout *mainLayout = new QGridLayout;
-    mainLayout->addWidget(wineGroup, 0, 0, 1, 2);
-    mainLayout->addWidget(listing, 1, 0, 1, 2);
+    QSize wineSize(1000, 1000);
+    QPixmap wine(":/res/pictures/1e5f7a1f88eef2f6ff842c442bdcd2eb--wine-bottle-glasses-wine-bottles.jpg");
+    wine.scaled(wineSize, Qt::KeepAspectRatio );
+    QLabel *winePicture = new QLabel;
+    winePicture->setPixmap(wine);
+    QTextEdit *text = new QTextEdit();
+    text->setText("Johnny's");
+    text->append("Wine");
 
-    setLayout(mainLayout);
+    QFont maFont;
+    maFont.setBold(true);
+    maFont.setPixelSize(100);
+    QLabel *lbl = new QLabel("Johnny's Wine");
+    lbl->setFont(maFont);
+
+    BorderLayout *layout = new BorderLayout;
+    //layout->addWidget(centralWidget, BorderLayout::Center);
+    //layout->addWidget(wineGroup, BorderLayout::North);
+    layout->addWidget(winePicture, BorderLayout::West);
+    layout->addWidget(lbl, BorderLayout::North);
+    layout->addWidget(wineGroup, BorderLayout::Center);
+   // layout->addWidget(createLabel("East 2") , BorderLayout::East);
+   // layout->addWidget(createLabel("South"), BorderLayout::South);
+    setLayout(layout);
+   // QGridLayout *mainLayout = new QGridLayout;
+   // mainLayout->addWidget(wineGroup, 0, 0, 1, 2);
+   // mainLayout->addWidget(winePicture, 1, 0);
+   // mainLayout->addWidget(text, 1, 1);
+
+   // setLayout(mainLayout);
 
 }

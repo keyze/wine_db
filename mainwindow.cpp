@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "pages.h"
 #include "homepage.h"
+#include "borderlayout.h"
 #include <QVBoxLayout>
 #include <QKeySequence>
 #include <QMessageBox>
@@ -40,8 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->setMargin(5);
     layout->addWidget(pagesWidget);
    // layout->addWidget(topFiller);
-    layout->addWidget(infoLabel);
-    layout->addWidget(bottomFiller);
+    //layout->addWidget(infoLabel);
+   // layout->addWidget(bottomFiller);
     widget->setLayout(layout);
 
     menuBar()->setNativeMenuBar(false);
