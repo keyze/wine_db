@@ -63,13 +63,17 @@ Homepage::Homepage(QWidget *parent) :
     QFont maFont;
     maFont.setBold(true);
     maFont.setPixelSize(100);
-    QLabel *lbl = new QLabel("Johnny's Wine");
+    QLabel *lbl = new QLabel("Johnny's Wine Collection!");
     lbl->setFont(maFont);
 
-    BorderLayout *layout = new BorderLayout;
-    layout->addWidget(winePicture, BorderLayout::West);
-    layout->addWidget(lbl, BorderLayout::North);
-    layout->addWidget(wineGroup, BorderLayout::Center);
+    QGridLayout *layout = new QGridLayout;
+    layout->addWidget(lbl, 0, 0, 1, 2);
+    layout->addWidget(winePicture, 1, 0);
+    layout->addWidget(wineGroup, 1, 1);
+ //   BorderLayout *layout = new BorderLayout;
+ //   layout->addWidget(winePicture, BorderLayout::West);
+ //   layout->addWidget(lbl, BorderLayout::North);
+ //   layout->addWidget(wineGroup, BorderLayout::Center);
 
     layout->setAlignment(lbl, Qt::AlignHCenter);
     layout->setAlignment(winePicture, Qt::AlignCenter);

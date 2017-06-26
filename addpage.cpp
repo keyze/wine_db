@@ -5,7 +5,9 @@
 AddPage::AddPage(QWidget *parent) :
     QWidget(parent)
 {
-
+    QComboBox *whiteBox = new QComboBox;
+    QComboBox *redBox = new QComboBox;
+    QComboBox *roseBox = new QComboBox;
 }
 
 void AddPage::addWhites(QComboBox *whiteBox)
