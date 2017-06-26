@@ -24,7 +24,7 @@ Homepage::Homepage(QWidget *parent) :
 
 
     this->setStyleSheet(styleSheet);
-
+    wineGroup->setAlignment(Qt::AlignHCenter);
     QFont buttonFont;
     buttonFont.setBold(true);
     buttonFont.setPixelSize(50);
@@ -67,19 +67,14 @@ Homepage::Homepage(QWidget *parent) :
     lbl->setFont(maFont);
 
     BorderLayout *layout = new BorderLayout;
-    //layout->addWidget(centralWidget, BorderLayout::Center);
-    //layout->addWidget(wineGroup, BorderLayout::North);
     layout->addWidget(winePicture, BorderLayout::West);
     layout->addWidget(lbl, BorderLayout::North);
     layout->addWidget(wineGroup, BorderLayout::Center);
-   // layout->addWidget(createLabel("East 2") , BorderLayout::East);
-   // layout->addWidget(createLabel("South"), BorderLayout::South);
-    setLayout(layout);
-   // QGridLayout *mainLayout = new QGridLayout;
-   // mainLayout->addWidget(wineGroup, 0, 0, 1, 2);
-   // mainLayout->addWidget(winePicture, 1, 0);
-   // mainLayout->addWidget(text, 1, 1);
 
-   // setLayout(mainLayout);
+    layout->setAlignment(lbl, Qt::AlignHCenter);
+    layout->setAlignment(winePicture, Qt::AlignCenter);
+    layout->setAlignment(wineGroup, Qt::AlignHCenter);
+
+    setLayout(layout);
 
 }

@@ -28,13 +28,15 @@ SOURCES += \
         mainwindow.cpp \
     pages.cpp \
     homepage.cpp \
-    borderlayout.cpp
+    borderlayout.cpp \
+    addpage.cpp
 
 HEADERS += \
         mainwindow.h \
     pages.h \
     homepage.h \
-    borderlayout.h
+    borderlayout.h \
+    addpage.h
 
 FORMS += \
         mainwindow.ui
