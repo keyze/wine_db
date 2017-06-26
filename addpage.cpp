@@ -16,8 +16,23 @@ AddPage::AddPage(QWidget *parent) :
     variety->addWidget(redBox);
     variety->addWidget(roseBox);
 
+    QGroupBox *colours = new QGroupBox(tr("Wine Colours"));
+
+    QRadioButton *white = new QRadioButton(tr("White"));
+    QRadioButton *red = new QRadioButton(tr("Red"));
+    QRadioButton *rose = new QRadioButton(tr("Rose"));
+
+    white->setChecked(true);
+
+    QVBoxLayout *radioLayout = new QVBoxLayout;
+    radioLayout->addWidget(white, 0, Qt::AlignCenter);
+    radioLayout->addWidget(red, 0, Qt::AlignCenter);
+    radioLayout->addWidget(rose, 0, Qt::AlignCenter);
+
+    colours->setLayout(radioLayout);
     QGridLayout *layout = new QGridLayout;
-    layout->addWidget(variety, 0, 0, 1, 2);
+    layout->addWidget(variety, 0, 1);
+    layout->addWidget(colours, 0, 0);
     setLayout(layout);
 
 }
