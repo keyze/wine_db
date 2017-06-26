@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "pages.h"
 #include "homepage.h"
+#include "addpage.h"
 #include "borderlayout.h"
 #include <QVBoxLayout>
 #include <QKeySequence>
@@ -30,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //something is buggering up the indexing so throwing in a fakepage at index 0 and adding the real one at index 1
     pagesWidget->addWidget(fakePage);
     pagesWidget->addWidget(new Homepage);
-    pagesWidget->addWidget(new ConfigurationPage);
+    pagesWidget->addWidget(new AddPage);
     pagesWidget->addWidget(new UpdatePage);
     pagesWidget->addWidget(new QueryPage);
 
