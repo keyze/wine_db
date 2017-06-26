@@ -14,7 +14,7 @@ AddPage::AddPage(QWidget *parent) :
     QComboBox *redBox = addReds();
     QComboBox *roseBox = addRoses();
 
-    QStackedWidget *variety = new QStackedWidget;
+    variety = new QStackedWidget;
     variety->addWidget(whiteBox);
     variety->addWidget(redBox);
     variety->addWidget(roseBox);
@@ -22,8 +22,11 @@ AddPage::AddPage(QWidget *parent) :
     QGroupBox *colours = new QGroupBox(tr("Wine Colours"));
 
     QRadioButton *white = new QRadioButton(tr("White"));
+    connect(white, SIGNAL(clicked(bool)), this, SLOT(setWineListWhite()));
     QRadioButton *red = new QRadioButton(tr("Red"));
+    connect(red, SIGNAL(clicked(bool)), this, SLOT(setWineListRed()));
     QRadioButton *rose = new QRadioButton(tr("Rose"));
+    connect(rose, SIGNAL(clicked(bool)), this, SLOT(setWineListRose()));
 
     white->setChecked(true);
 
@@ -39,6 +42,8 @@ AddPage::AddPage(QWidget *parent) :
     layout->addWidget(colours, 0, 0);
     layout->addWidget(addWineParameters(), 1, 0);
     setLayout(layout);
+
+    connect(this, SIGNAL(setWineList(int)), this, SLOT(changeWineList(int)));
 
 }
 
@@ -91,4 +96,29 @@ QGroupBox *AddPage::addWineParameters()
     params->setLayout(paramsLayout);
     return params;
 
+}
+
+void AddPage::setWineListRed()
+{
+    emit AddPage::setWineList(1);
+}
+
+void AddPage::setWineListWhite()
+{
+    emit AddPage::setWineList(0);
+}
+
+void AddPage::setWineListRose()
+{
+    emit AddPage::setWineList(2);
+}
+
+void AddPage::changeWineList(int wineList)
+{
+    variety->setCurrentIndex(wineList);
+}
+
+AddPage::~AddPage()
+{
+    this->close();
 }
