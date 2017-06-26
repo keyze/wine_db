@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pagesWidget = new QStackedWidget;
     //something is buggering up the indexing so throwing in a fakepage at index 0 and adding the real one at index 1
     pagesWidget->addWidget(fakePage);
-    pagesWidget->addWidget(new Homepage);
+    pagesWidget->addWidget(new Homepage(pagesWidget));
     pagesWidget->addWidget(new AddPage);
     pagesWidget->addWidget(new UpdatePage);
     pagesWidget->addWidget(new QueryPage);

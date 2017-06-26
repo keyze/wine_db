@@ -3,6 +3,9 @@
 #include <QButtonGroup>
 #include <QStackedWidget>
 #include <QGridLayout>
+#include <QRadioButton>
+#include <QLineEdit>
+#include <QLabel>
 
 AddPage::AddPage(QWidget *parent) :
     QWidget(parent)
@@ -25,14 +28,16 @@ AddPage::AddPage(QWidget *parent) :
     white->setChecked(true);
 
     QVBoxLayout *radioLayout = new QVBoxLayout;
-    radioLayout->addWidget(white, 0, Qt::AlignCenter);
-    radioLayout->addWidget(red, 0, Qt::AlignCenter);
-    radioLayout->addWidget(rose, 0, Qt::AlignCenter);
+    radioLayout->addWidget(white, 1, Qt::AlignCenter);
+    radioLayout->addWidget(red, 1, Qt::AlignCenter);
+    radioLayout->addWidget(rose, 1, Qt::AlignCenter);
+
 
     colours->setLayout(radioLayout);
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(variety, 0, 1);
     layout->addWidget(colours, 0, 0);
+    layout->addWidget(addWineParameters(), 1, 0);
     setLayout(layout);
 
 }
@@ -57,4 +62,33 @@ QComboBox *AddPage::addRoses()
     QComboBox *roseBox = new QComboBox;
     roseBox->insertItem(0, "Rose");
     return roseBox;
+}
+
+QGroupBox *AddPage::addWineParameters()
+{
+    QGroupBox *params = new QGroupBox;
+    QGridLayout *paramsLayout = new QGridLayout;
+
+    QLineEdit *yearEdit = new QLineEdit;
+    QLineEdit *regionEdit = new QLineEdit;
+    QLineEdit *vineyardEdit = new QLineEdit;
+    QLineEdit *priceEdit = new QLineEdit;
+
+    QLabel *yearLabel = new QLabel(tr("Year:"));
+    QLabel *regionLabel = new QLabel(tr("Region"));
+    QLabel *vineyardLabel = new QLabel(tr("Vineyard"));
+    QLabel *priceLabel = new QLabel(tr("Price"));
+
+    paramsLayout->addWidget(yearLabel, 0, 0);
+    paramsLayout->addWidget(yearEdit, 0, 1);
+    paramsLayout->addWidget(regionLabel, 1, 0);
+    paramsLayout->addWidget(regionEdit, 1, 1);
+    paramsLayout->addWidget(vineyardLabel, 2, 0);
+    paramsLayout->addWidget(vineyardEdit, 2, 1);
+    paramsLayout->addWidget(priceLabel, 3, 0);
+    paramsLayout->addWidget(priceEdit, 3, 1);
+
+    params->setLayout(paramsLayout);
+    return params;
+
 }

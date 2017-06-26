@@ -8,9 +8,11 @@
 #include <QLabel>
 #include <QPixmap>
 
-Homepage::Homepage(QWidget *parent) :
+Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
     QWidget(parent)
 {
+    changePage = pages;
+
     QGroupBox *wineGroup = new QGroupBox();
     QString styleSheet;
     styleSheet = "\
@@ -35,6 +37,8 @@ Homepage::Homepage(QWidget *parent) :
     removeButton->setFont(buttonFont);
     QPushButton *searchButton = new QPushButton(tr("Search Wine"));
     searchButton->setFont(buttonFont);
+
+    connect(addButton, SIGNAL(clicked(bool)), this, SLOT(goToAddPage()));
 
     addButton->setFixedHeight(200);
     addButton->setFixedWidth(1100);
@@ -81,4 +85,9 @@ Homepage::Homepage(QWidget *parent) :
 
     setLayout(layout);
 
+}
+
+void Homepage::goToAddPage()
+{
+    changePage->setCurrentIndex(2);
 }

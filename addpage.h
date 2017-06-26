@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QComboBox>
+#include <QGroupBox>
 
 class AddPage : public QWidget
 {
@@ -13,6 +14,8 @@ private:
     QComboBox* addReds();
     QComboBox* addWhites();
     QComboBox* addRoses();
+
+    QGroupBox *addWineParameters();
 
 };
 
