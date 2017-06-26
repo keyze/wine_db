@@ -7,3 +7,18 @@ AddPage::AddPage(QWidget *parent) :
 {
 
 }
+
+void AddPage::addWhites(QComboBox *whiteBox)
+{
+
+}
+
+void AddPage::addReds(QComboBox *redBox)
+{
+
+}
+
+void AddPage::addRoses(QComboBox *roseBox)
+{
+
+}
