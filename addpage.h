@@ -24,12 +24,24 @@ signals:
 
 private:
 
+    QGroupBox *setUpColours();
     QStackedWidget *variety;
+    QComboBox* redBox;
+    QComboBox* whiteBox;
+    QComboBox* roseBox;
+
     QComboBox* addReds();
     QComboBox* addWhites();
     QComboBox* addRoses();
 
     QGroupBox *addWineParameters();
+
+    QLineEdit *yearEdit;
+    QLineEdit *regionEdit;
+    QLineEdit *vineyardEdit;
+    QLineEdit *priceEdit;
+    QLineEdit *locationEdit;
+    QLineEdit *quantityEdit;
 
 
 };

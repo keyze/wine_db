@@ -6,10 +6,14 @@
 #include <QRadioButton>
 #include <QLineEdit>
 #include <QLabel>
+#include <QTextEdit>
+#include <QDebug>
+#include <QPushButton>
 
 AddPage::AddPage(QWidget *parent) :
     QWidget(parent)
 {
+    QPushButton *addWine = new QPushButton(tr("Add Wine"));
     QComboBox *whiteBox = addWhites();
     QComboBox *redBox = addReds();
     QComboBox *roseBox = addRoses();
@@ -18,71 +22,84 @@ AddPage::AddPage(QWidget *parent) :
     variety->addWidget(whiteBox);
     variety->addWidget(redBox);
     variety->addWidget(roseBox);
-
-    QGroupBox *colours = new QGroupBox(tr("Wine Colours"));
-
-    QRadioButton *white = new QRadioButton(tr("White"));
-    connect(white, SIGNAL(clicked(bool)), this, SLOT(setWineListWhite()));
-    QRadioButton *red = new QRadioButton(tr("Red"));
-    connect(red, SIGNAL(clicked(bool)), this, SLOT(setWineListRed()));
-    QRadioButton *rose = new QRadioButton(tr("Rose"));
-    connect(rose, SIGNAL(clicked(bool)), this, SLOT(setWineListRose()));
-
-    white->setChecked(true);
-
-    QVBoxLayout *radioLayout = new QVBoxLayout;
-    radioLayout->addWidget(white, 1, Qt::AlignCenter);
-    radioLayout->addWidget(red, 1, Qt::AlignCenter);
-    radioLayout->addWidget(rose, 1, Qt::AlignCenter);
+    variety->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
 
-    colours->setLayout(radioLayout);
+    QGroupBox *colours = setUpColours();
+
+    QGroupBox *descriptionBox = new QGroupBox(tr("Description:"));
+    QTextEdit *description = new QTextEdit;
+    description->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    description->setLineWidth(2);
+
+    QHBoxLayout *descriptionLayout = new QHBoxLayout;
+    descriptionLayout->addWidget(description);
+    descriptionBox->setLayout(descriptionLayout);
+
     QGridLayout *layout = new QGridLayout;
-    layout->addWidget(variety, 0, 1);
+    layout->addWidget(variety, 0, 1, 1, 1, Qt::AlignCenter);
     layout->addWidget(colours, 0, 0);
     layout->addWidget(addWineParameters(), 1, 0);
+    layout->addWidget(descriptionBox, 1, 1);
+    layout->addWidget(addWine, 2, 0, 1, 2);
+
     setLayout(layout);
 
     connect(this, SIGNAL(setWineList(int)), this, SLOT(changeWineList(int)));
-
+    qDebug() << description->toPlainText();
 }
 
 QComboBox *AddPage::addWhites()
 {
-    QComboBox *whiteBox = new QComboBox;
+    whiteBox = new QComboBox;
+    whiteBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+    whiteBox->setMinimumHeight(20);
+
+    QFont whiteFont;
+    whiteFont.setBold(true);
+    whiteFont.setPixelSize(20);
+
+    whiteBox->setFont(whiteFont);
     whiteBox->insertItem(0, "Chardonay");
+    whiteBox->addItem("Riesling");
     return whiteBox;
 
 }
 
 QComboBox *AddPage::addReds()
 {
-    QComboBox *redBox = new QComboBox;
+    redBox = new QComboBox;
     redBox->insertItem(0, "Shiraz");
+    redBox->addItem("Merlot");
     return redBox;
 }
 
 QComboBox *AddPage::addRoses()
 {
-    QComboBox *roseBox = new QComboBox;
-    roseBox->insertItem(0, "Rose");
+    roseBox = new QComboBox;
+    roseBox->insertItem(0, "Grenache");
+    roseBox->addItem("Tempranillo");
     return roseBox;
 }
 
 QGroupBox *AddPage::addWineParameters()
 {
-    QGroupBox *params = new QGroupBox;
+    QGroupBox *params = new QGroupBox(tr("Details"));
     QGridLayout *paramsLayout = new QGridLayout;
 
-    QLineEdit *yearEdit = new QLineEdit;
-    QLineEdit *regionEdit = new QLineEdit;
-    QLineEdit *vineyardEdit = new QLineEdit;
-    QLineEdit *priceEdit = new QLineEdit;
+    yearEdit = new QLineEdit;
+    regionEdit = new QLineEdit;
+    vineyardEdit = new QLineEdit;
+    priceEdit = new QLineEdit;
+    locationEdit = new QLineEdit;
+    quantityEdit = new QLineEdit;
 
     QLabel *yearLabel = new QLabel(tr("Year:"));
-    QLabel *regionLabel = new QLabel(tr("Region"));
-    QLabel *vineyardLabel = new QLabel(tr("Vineyard"));
-    QLabel *priceLabel = new QLabel(tr("Price"));
+    QLabel *regionLabel = new QLabel(tr("Region:"));
+    QLabel *vineyardLabel = new QLabel(tr("Vineyard:"));
+    QLabel *priceLabel = new QLabel(tr("Price:"));
+    QLabel *locationLabel = new QLabel(tr("Location:"));
+    QLabel *quantityLabel = new QLabel(tr("Quantity"));
 
     paramsLayout->addWidget(yearLabel, 0, 0);
     paramsLayout->addWidget(yearEdit, 0, 1);
@@ -92,9 +109,43 @@ QGroupBox *AddPage::addWineParameters()
     paramsLayout->addWidget(vineyardEdit, 2, 1);
     paramsLayout->addWidget(priceLabel, 3, 0);
     paramsLayout->addWidget(priceEdit, 3, 1);
-
+    paramsLayout->addWidget(locationLabel, 4, 0);
+    paramsLayout->addWidget(locationEdit, 4, 1);
+    paramsLayout->addWidget(quantityLabel, 5, 0);
+    paramsLayout->addWidget(quantityEdit, 5, 1);
     params->setLayout(paramsLayout);
     return params;
+
+}
+
+QGroupBox *AddPage::setUpColours()
+{
+    QGroupBox *colours = new QGroupBox(tr("Colour"));
+    QFont radioFont;
+    radioFont.setBold(true);
+    radioFont.setPixelSize(20);
+
+    QRadioButton *white = new QRadioButton(tr("White"));
+    white->setFont(radioFont);
+    connect(white, SIGNAL(clicked(bool)), this, SLOT(setWineListWhite()));
+    QRadioButton *red = new QRadioButton(tr("Red"));
+    red->setFont(radioFont);
+    connect(red, SIGNAL(clicked(bool)), this, SLOT(setWineListRed()));
+    QRadioButton *rose = new QRadioButton(tr("Rose"));
+    rose->setFont(radioFont);
+    connect(rose, SIGNAL(clicked(bool)), this, SLOT(setWineListRose()));
+
+    white->setChecked(true);
+
+    QVBoxLayout *radioLayout = new QVBoxLayout;
+    radioLayout->addWidget(white, 1, Qt::AlignHCenter);
+    radioLayout->addWidget(red, 1, Qt::AlignHCenter);
+    radioLayout->addWidget(rose, 1, Qt::AlignHCenter);
+
+
+    colours->setLayout(radioLayout);
+    colours->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    return colours;
 
 }
 

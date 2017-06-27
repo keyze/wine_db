@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QWidget *widget = new QWidget;
+    widget->setStyleSheet("background-color:white;");
     setCentralWidget(widget);
 
     QWidget *topFiller = new QWidget;
