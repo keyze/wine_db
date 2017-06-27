@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QKeySequence>
 #include <QMessageBox>
+#include <QPalette>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,7 +15,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QWidget *widget = new QWidget;
-    widget->setStyleSheet("background-color:white;");
+    QPalette pal = palette();
+    pal.setColor(QPalette::Background, Qt::white);
+
+    widget->setAutoFillBackground(true);
+    widget->setPalette(pal);
     setCentralWidget(widget);
 
     QWidget *topFiller = new QWidget;

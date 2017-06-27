@@ -14,6 +14,8 @@ AddPage::AddPage(QWidget *parent) :
     QWidget(parent)
 {
     QPushButton *addWine = new QPushButton(tr("Add Wine"));
+    QGroupBox *varietyBox = new QGroupBox(tr("Variety"));
+   // varietyBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     QComboBox *whiteBox = addWhites();
     QComboBox *redBox = addReds();
     QComboBox *roseBox = addRoses();
@@ -22,8 +24,15 @@ AddPage::AddPage(QWidget *parent) :
     variety->addWidget(whiteBox);
     variety->addWidget(redBox);
     variety->addWidget(roseBox);
-    variety->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+  //  variety->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+    QVBoxLayout *varietyLayout = new QVBoxLayout;
+    varietyLayout->addWidget(variety);
+    varietyLayout->addStretch();
+    varietyLayout->addStretch();
+    varietyLayout->addStretch();
+    varietyLayout->addStretch();
+    varietyBox->setLayout(varietyLayout);
 
     QGroupBox *colours = setUpColours();
 
@@ -37,7 +46,7 @@ AddPage::AddPage(QWidget *parent) :
     descriptionBox->setLayout(descriptionLayout);
 
     QGridLayout *layout = new QGridLayout;
-    layout->addWidget(variety, 0, 1, 1, 1, Qt::AlignCenter);
+    layout->addWidget(varietyBox, 0, 1);
     layout->addWidget(colours, 0, 0);
     layout->addWidget(addWineParameters(), 1, 0);
     layout->addWidget(descriptionBox, 1, 1);
@@ -52,11 +61,10 @@ AddPage::AddPage(QWidget *parent) :
 QComboBox *AddPage::addWhites()
 {
     whiteBox = new QComboBox;
-    whiteBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-    whiteBox->setMinimumHeight(20);
-
+   // whiteBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+   // whiteBox->setMinimumHeight(20);
+    whiteBox->setMaximumHeight(30);
     QFont whiteFont;
-    whiteFont.setBold(true);
     whiteFont.setPixelSize(20);
 
     whiteBox->setFont(whiteFont);
