@@ -13,9 +13,14 @@
 AddPage::AddPage(QWidget *parent) :
     QWidget(parent)
 {
-    QPushButton *addWine = new QPushButton(tr("Add Wine"));
-    QGroupBox *varietyBox = new QGroupBox(tr("Variety"));
-   // varietyBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    QPushButton *addWine = new QPushButton(tr("Add Wine!"));
+    QFont wineFont;
+    wineFont.setPixelSize(30);
+    wineFont.setBold(true);
+
+    addWine->setFont(wineFont);
+
+    QGroupBox *varietyBox = new QGroupBox(tr("Variety:"));
     QComboBox *whiteBox = addWhites();
     QComboBox *redBox = addReds();
     QComboBox *roseBox = addRoses();
@@ -24,7 +29,6 @@ AddPage::AddPage(QWidget *parent) :
     variety->addWidget(whiteBox);
     variety->addWidget(redBox);
     variety->addWidget(roseBox);
-  //  variety->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     QVBoxLayout *varietyLayout = new QVBoxLayout;
     varietyLayout->addWidget(variety);
@@ -55,14 +59,11 @@ AddPage::AddPage(QWidget *parent) :
     setLayout(layout);
 
     connect(this, SIGNAL(setWineList(int)), this, SLOT(changeWineList(int)));
-    qDebug() << description->toPlainText();
 }
 
 QComboBox *AddPage::addWhites()
 {
     whiteBox = new QComboBox;
-   // whiteBox->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-   // whiteBox->setMinimumHeight(20);
     whiteBox->setMaximumHeight(30);
     QFont whiteFont;
     whiteFont.setPixelSize(20);
@@ -77,6 +78,12 @@ QComboBox *AddPage::addWhites()
 QComboBox *AddPage::addReds()
 {
     redBox = new QComboBox;
+    redBox->setMaximumHeight(30);
+
+    QFont redFont;
+    redFont.setPixelSize(20);
+
+    redBox->setFont(redFont);
     redBox->insertItem(0, "Shiraz");
     redBox->addItem("Merlot");
     return redBox;
@@ -85,6 +92,12 @@ QComboBox *AddPage::addReds()
 QComboBox *AddPage::addRoses()
 {
     roseBox = new QComboBox;
+    roseBox->setMaximumHeight(30);
+
+    QFont roseFont;
+    roseFont.setPixelSize(20);
+
+    roseBox->setFont(roseFont);
     roseBox->insertItem(0, "Grenache");
     roseBox->addItem("Tempranillo");
     return roseBox;
@@ -92,7 +105,7 @@ QComboBox *AddPage::addRoses()
 
 QGroupBox *AddPage::addWineParameters()
 {
-    QGroupBox *params = new QGroupBox(tr("Details"));
+    QGroupBox *params = new QGroupBox(tr("Details:"));
     QGridLayout *paramsLayout = new QGridLayout;
 
     yearEdit = new QLineEdit;
@@ -107,7 +120,7 @@ QGroupBox *AddPage::addWineParameters()
     QLabel *vineyardLabel = new QLabel(tr("Vineyard:"));
     QLabel *priceLabel = new QLabel(tr("Price:"));
     QLabel *locationLabel = new QLabel(tr("Location:"));
-    QLabel *quantityLabel = new QLabel(tr("Quantity"));
+    QLabel *quantityLabel = new QLabel(tr("Quantity:"));
 
     paramsLayout->addWidget(yearLabel, 0, 0);
     paramsLayout->addWidget(yearEdit, 0, 1);
@@ -128,7 +141,7 @@ QGroupBox *AddPage::addWineParameters()
 
 QGroupBox *AddPage::setUpColours()
 {
-    QGroupBox *colours = new QGroupBox(tr("Colour"));
+    QGroupBox *colours = new QGroupBox(tr("Colour:"));
     QFont radioFont;
     radioFont.setBold(true);
     radioFont.setPixelSize(20);
