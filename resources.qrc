@@ -4,5 +4,6 @@
         <file>pictures/1e5f7a1f88eef2f6ff842c442bdcd2eb--wine-bottle-glasses-wine-bottles.jpg</file>
         <file>pictures/bottle-wine-clipart.png</file>
         <file>pictures/ruou.jpg</file>
+        <file>database/wine.db</file>
     </qresource>
 </RCC>
