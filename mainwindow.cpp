@@ -3,6 +3,7 @@
 #include "pages.h"
 #include "homepage.h"
 #include "addpage.h"
+#include "database/dbmanager.h"
 #include "borderlayout.h"
 #include <QVBoxLayout>
 #include <QKeySequence>
@@ -14,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    DbManager *db = new DbManager;
+
     QWidget *widget = new QWidget;
     QPalette pal = palette();
     pal.setColor(QPalette::Background, Qt::white);
