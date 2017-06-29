@@ -9,6 +9,7 @@
 #include <QTextEdit>
 #include <QDebug>
 #include <QPushButton>
+#include <QDoubleValidator>
 
 AddPage::AddPage(QWidget *parent) :
     QWidget(parent)
@@ -112,6 +113,8 @@ QGroupBox *AddPage::addWineParameters()
     regionEdit = new QLineEdit;
     vineyardEdit = new QLineEdit;
     priceEdit = new QLineEdit;
+    priceEdit->setValidator(new QDoubleValidator(0.00, 20000.00, 2, priceEdit));
+
     locationEdit = new QLineEdit;
     quantityEdit = new QLineEdit;
 

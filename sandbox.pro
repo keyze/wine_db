@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
+QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = sandbox
@@ -30,7 +29,8 @@ SOURCES += \
     homepage.cpp \
     borderlayout.cpp \
     addpage.cpp \
-    stuff.cpp
+    stuff.cpp \
+    database/dbmanager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +38,8 @@ HEADERS += \
     homepage.h \
     borderlayout.h \
     addpage.h \
-    stuff.h
+    stuff.h \
+    database/dbmanager.h
 
 FORMS += \
         mainwindow.ui
