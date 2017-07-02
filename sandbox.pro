@@ -30,7 +30,9 @@ SOURCES += \
     borderlayout.cpp \
     addpage.cpp \
     stuff.cpp \
-    database/dbmanager.cpp
+    database/dbmanager.cpp \
+    wine.cpp \
+    Pages/searchpage.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +41,9 @@ HEADERS += \
     borderlayout.h \
     addpage.h \
     stuff.h \
-    database/dbmanager.h
+    database/dbmanager.h \
+    wine.h \
+    Pages/searchpage.h
 
 FORMS += \
         mainwindow.ui

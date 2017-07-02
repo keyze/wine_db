@@ -33,7 +33,7 @@ Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
 
     QPushButton *addButton = new QPushButton(tr("Add Wine"));
     addButton->setFont(buttonFont);
-    QPushButton *removeButton = new QPushButton(tr("Remove Wine"));
+    QPushButton *removeButton = new QPushButton(tr("Taken to Drink!"));
     removeButton->setFont(buttonFont);
     QPushButton *searchButton = new QPushButton(tr("Search Wine"));
     searchButton->setFont(buttonFont);
@@ -51,8 +51,9 @@ Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
 
     QVBoxLayout *buttonLayout = new QVBoxLayout;
     buttonLayout->addWidget(addButton);
-    buttonLayout->addWidget(removeButton);
     buttonLayout->addWidget(searchButton);
+    buttonLayout->addWidget(removeButton);
+
     wineGroup->setLayout(buttonLayout);
 
     QSize wineSize(1000, 1000);

@@ -24,6 +24,7 @@ signals:
 
 private:
 
+    QFont groupFont;
     QGroupBox *setUpColours();
     QStackedWidget *variety;
     QComboBox* redBox;
@@ -36,7 +37,8 @@ private:
 
     QGroupBox *addWineParameters();
 
-    QLineEdit *yearEdit;
+    QLineEdit *nameEdit;
+    QLineEdit *vintageEdit;
     QLineEdit *regionEdit;
     QLineEdit *vineyardEdit;
     QLineEdit *priceEdit;

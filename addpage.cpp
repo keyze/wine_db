@@ -14,14 +14,21 @@
 AddPage::AddPage(QWidget *parent) :
     QWidget(parent)
 {
+    groupFont.setPixelSize(20);
+    groupFont.setBold(true);
+    groupFont.setItalic(true);
+
     QPushButton *addWine = new QPushButton(tr("Add Wine!"));
+    addWine->setMaximumHeight(50);
     QFont wineFont;
-    wineFont.setPixelSize(30);
+    wineFont.setPixelSize(20);
     wineFont.setBold(true);
 
     addWine->setFont(wineFont);
 
     QGroupBox *varietyBox = new QGroupBox(tr("Variety:"));
+    varietyBox->setFont(groupFont);
+
     QComboBox *whiteBox = addWhites();
     QComboBox *redBox = addReds();
     QComboBox *roseBox = addRoses();
@@ -40,11 +47,20 @@ AddPage::AddPage(QWidget *parent) :
     varietyBox->setLayout(varietyLayout);
 
     QGroupBox *colours = setUpColours();
+    colours->setFont(groupFont);
 
     QGroupBox *descriptionBox = new QGroupBox(tr("Description:"));
+    descriptionBox->setFont(groupFont);
+
+    QFont textFont;
+    textFont.setPixelSize(20);
+    textFont.setBold(false);
+    textFont.setItalic(false);
+
     QTextEdit *description = new QTextEdit;
     description->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     description->setLineWidth(2);
+    description->setFont(textFont);
 
     QHBoxLayout *descriptionLayout = new QHBoxLayout;
     descriptionLayout->addWidget(description);
@@ -107,9 +123,16 @@ QComboBox *AddPage::addRoses()
 QGroupBox *AddPage::addWineParameters()
 {
     QGroupBox *params = new QGroupBox(tr("Details:"));
-    QGridLayout *paramsLayout = new QGridLayout;
+    QVBoxLayout *paramsLayout = new QVBoxLayout;
+    params->setFont(groupFont);
 
-    yearEdit = new QLineEdit;
+    QFont paramFont;
+    paramFont.setPixelSize(20);
+    paramFont.setBold(true);
+    paramFont.setItalic(true);
+
+    nameEdit = new QLineEdit;
+    vintageEdit = new QLineEdit;
     regionEdit = new QLineEdit;
     vineyardEdit = new QLineEdit;
     priceEdit = new QLineEdit;
@@ -118,25 +141,42 @@ QGroupBox *AddPage::addWineParameters()
     locationEdit = new QLineEdit;
     quantityEdit = new QLineEdit;
 
-    QLabel *yearLabel = new QLabel(tr("Year:"));
-    QLabel *regionLabel = new QLabel(tr("Region:"));
+    QLabel *nameLabel = new QLabel(tr("Name of Wine:"));
+    nameLabel->setFont(paramFont);
+    QLabel *vintageLabel = new QLabel(tr("Vintage:"));
+    vintageLabel->setFont(paramFont);
+    QLabel *regionLabel = new QLabel(tr("Denomination of Origin:"));
+    regionLabel->setFont(paramFont);
     QLabel *vineyardLabel = new QLabel(tr("Vineyard:"));
+    vineyardLabel->setFont(paramFont);
     QLabel *priceLabel = new QLabel(tr("Price:"));
+    priceLabel->setFont(paramFont);
     QLabel *locationLabel = new QLabel(tr("Location:"));
+    locationLabel->setFont(paramFont);
     QLabel *quantityLabel = new QLabel(tr("Quantity:"));
+    quantityLabel->setFont(paramFont);
 
-    paramsLayout->addWidget(yearLabel, 0, 0);
-    paramsLayout->addWidget(yearEdit, 0, 1);
-    paramsLayout->addWidget(regionLabel, 1, 0);
-    paramsLayout->addWidget(regionEdit, 1, 1);
-    paramsLayout->addWidget(vineyardLabel, 2, 0);
-    paramsLayout->addWidget(vineyardEdit, 2, 1);
-    paramsLayout->addWidget(priceLabel, 3, 0);
-    paramsLayout->addWidget(priceEdit, 3, 1);
-    paramsLayout->addWidget(locationLabel, 4, 0);
-    paramsLayout->addWidget(locationEdit, 4, 1);
-    paramsLayout->addWidget(quantityLabel, 5, 0);
-    paramsLayout->addWidget(quantityEdit, 5, 1);
+    paramsLayout->addWidget(nameLabel);
+    paramsLayout->addWidget(nameEdit);
+
+    paramsLayout->addWidget(regionLabel);
+    paramsLayout->addWidget(regionEdit);
+
+    paramsLayout->addWidget(vineyardLabel);
+    paramsLayout->addWidget(vineyardEdit);
+
+    paramsLayout->addWidget(vintageLabel);
+    paramsLayout->addWidget(vintageEdit);
+
+    paramsLayout->addWidget(priceLabel);
+    paramsLayout->addWidget(priceEdit);
+
+    paramsLayout->addWidget(locationLabel);
+    paramsLayout->addWidget(locationEdit);
+
+    paramsLayout->addWidget(quantityLabel);
+    paramsLayout->addWidget(quantityEdit);
+
     params->setLayout(paramsLayout);
     return params;
 
