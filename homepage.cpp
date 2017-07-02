@@ -75,10 +75,6 @@ Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
     layout->addWidget(lbl, 0, 0, 1, 2);
     layout->addWidget(winePicture, 1, 0);
     layout->addWidget(wineGroup, 1, 1);
- //   BorderLayout *layout = new BorderLayout;
- //   layout->addWidget(winePicture, BorderLayout::West);
- //   layout->addWidget(lbl, BorderLayout::North);
- //   layout->addWidget(wineGroup, BorderLayout::Center);
 
     layout->setAlignment(lbl, Qt::AlignHCenter);
     layout->setAlignment(winePicture, Qt::AlignCenter);

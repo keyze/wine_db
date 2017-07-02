@@ -11,9 +11,10 @@
 #include <QPushButton>
 #include <QDoubleValidator>
 
-AddPage::AddPage(QWidget *parent) :
-    QWidget(parent)
+AddPage::AddPage(DbManager* db, QWidget *parent) :
+    QWidget(parent), theDB(db)
 {
+
     groupFont.setPixelSize(20);
     groupFont.setBold(true);
     groupFont.setItalic(true);
@@ -57,7 +58,7 @@ AddPage::AddPage(QWidget *parent) :
     textFont.setBold(false);
     textFont.setItalic(false);
 
-    QTextEdit *description = new QTextEdit;
+    description = new QTextEdit;
     description->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     description->setLineWidth(2);
     description->setFont(textFont);
@@ -76,6 +77,7 @@ AddPage::AddPage(QWidget *parent) :
     setLayout(layout);
 
     connect(this, SIGNAL(setWineList(int)), this, SLOT(changeWineList(int)));
+    connect(addWine, SIGNAL(clicked(bool)), this, SLOT(addWinetoDB()));
 }
 
 QComboBox *AddPage::addWhites()
@@ -103,6 +105,7 @@ QComboBox *AddPage::addReds()
     redBox->setFont(redFont);
     redBox->insertItem(0, "Shiraz");
     redBox->addItem("Merlot");
+    redBox->addItem("Pinot Noir");
     return redBox;
 }
 
@@ -189,13 +192,15 @@ QGroupBox *AddPage::setUpColours()
     radioFont.setBold(true);
     radioFont.setPixelSize(20);
 
-    QRadioButton *white = new QRadioButton(tr("White"));
+    white = new QRadioButton(tr("White"));
     white->setFont(radioFont);
     connect(white, SIGNAL(clicked(bool)), this, SLOT(setWineListWhite()));
-    QRadioButton *red = new QRadioButton(tr("Red"));
+
+    red = new QRadioButton(tr("Red"));
     red->setFont(radioFont);
     connect(red, SIGNAL(clicked(bool)), this, SLOT(setWineListRed()));
-    QRadioButton *rose = new QRadioButton(tr("Rose"));
+
+    rose = new QRadioButton(tr("Rose"));
     rose->setFont(radioFont);
     connect(rose, SIGNAL(clicked(bool)), this, SLOT(setWineListRose()));
 
@@ -231,6 +236,62 @@ void AddPage::setWineListRose()
 void AddPage::changeWineList(int wineList)
 {
     variety->setCurrentIndex(wineList);
+}
+
+Wine* AddPage::createWine()
+{
+    Wine* myWine = new Wine;
+    if ( red->isChecked() ) {
+        QString colour = "Red";
+        myWine->setColour(colour);
+
+        QString variety = redBox->currentText();
+        myWine->setVariety(variety);
+    } else if ( white->isChecked() ) {
+        QString colour = "White";
+        myWine->setColour(colour);
+
+        QString variety = whiteBox->currentText();
+        myWine->setVariety(variety);
+    } else {
+        QString colour = "Rose";
+        myWine->setColour(colour);
+
+        QString variety = roseBox->currentText();
+        myWine->setVariety(variety);
+    }
+
+    QString region = regionEdit->text();
+    myWine->setRegion(region);
+
+    QString name = nameEdit->text();
+    myWine->setName(name);
+
+    QString vineyard = vineyardEdit->text();
+    myWine->setVineyard(vineyard);
+
+    QString location = locationEdit->text();
+    myWine->setLocation(location);
+
+    int vintage = vintageEdit->text().toInt();
+    myWine->setVintage(vintage);
+
+    int quantity = quantityEdit->text().toInt();
+    myWine->setQuantity(quantity);
+
+    double price = priceEdit->text().toDouble();
+    myWine->setPrice(price);
+
+    QString theDescription = description->toPlainText();
+    myWine->setDescription(theDescription);
+
+    return myWine;
+}
+
+void AddPage::addWinetoDB()
+{
+    Wine* wine = createWine();
+    theDB->addWine(wine);
 }
 
 AddPage::~AddPage()

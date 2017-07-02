@@ -2,7 +2,7 @@
 #define DBMANAGER_H
 
 #include <QSqlDatabase>
-
+#include <wine.h>
 
 
 class DbManager
@@ -14,7 +14,7 @@ public:
 
     bool isOpen() const;
 
-    bool addWine();
+    bool addWine(Wine* wine);
 
     bool removeWine();
 

@@ -24,8 +24,27 @@ bool DbManager::isOpen() const
     return wine_db.isOpen();
 }
 
-bool DbManager::addWine()
+bool DbManager::addWine(Wine *wine)
 {
+    QSqlQuery insertQuery;
+    insertQuery.prepare("INSERT INTO wines (colour, variety, name, region, vineyard,"
+                        "vintage, description, price, location, quantity)"
+                        "VALUES (:colour, :variety, :name, :region, :vineyard,"
+                        ":vintage, :description, :price, :location, :quantity)");
+    insertQuery.bindValue(":colour", wine->getColour());
+    insertQuery.bindValue(":variety", wine->getVariety());
+    insertQuery.bindValue(":name", wine->getName());
+    insertQuery.bindValue(":region", wine->getRegion());
+    insertQuery.bindValue(":vineyard", wine->getVineyard());
+    insertQuery.bindValue(":vintage", wine->getVintage());
+    insertQuery.bindValue(":description", wine->getDescription());
+    insertQuery.bindValue(":price", wine->getPrice());
+    insertQuery.bindValue(":location", wine->getLocation());
+    insertQuery.bindValue(":quantity", wine->getQuantity());
+
+    return insertQuery.exec();
+
+
     return true;
 }
 
