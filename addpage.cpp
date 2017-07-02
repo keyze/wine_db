@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QDoubleValidator>
+#include <QDebug>
 
 AddPage::AddPage(DbManager* db, QWidget *parent) :
     QWidget(parent), theDB(db)
@@ -290,8 +291,15 @@ Wine* AddPage::createWine()
 
 void AddPage::addWinetoDB()
 {
+    qDebug() << "Adding Wine";
     Wine* wine = createWine();
-    theDB->addWine(wine);
+    if ( theDB->addWine(wine) ) {
+        qDebug() << "Success";
+    } else {
+        qDebug() << "Failed";
+    }
+
+
 }
 
 AddPage::~AddPage()
