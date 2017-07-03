@@ -14,6 +14,7 @@ public:
 
 private slots:
     void goToAddPage();
+    void goToSearchPage();
 
 private:
     QStackedWidget *changePage;

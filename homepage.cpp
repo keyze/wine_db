@@ -39,6 +39,7 @@ Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
     searchButton->setFont(buttonFont);
 
     connect(addButton, SIGNAL(clicked(bool)), this, SLOT(goToAddPage()));
+    connect(searchButton, SIGNAL(clicked(bool)), this, SLOT(goToSearchPage()));
 
     addButton->setFixedHeight(200);
     addButton->setFixedWidth(1100);
@@ -87,4 +88,9 @@ Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
 void Homepage::goToAddPage()
 {
     changePage->setCurrentIndex(2);
+}
+
+void Homepage::goToSearchPage()
+{
+    changePage->setCurrentIndex(3);
 }

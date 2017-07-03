@@ -298,8 +298,21 @@ void AddPage::addWinetoDB()
     } else {
         qDebug() << "Failed";
     }
+    clearFields();
 
+}
 
+void AddPage::clearFields()
+{
+    nameEdit->setText("");
+    vintageEdit->setText("");
+    regionEdit->setText("");
+    vineyardEdit->setText("");
+    priceEdit->setText("");
+
+    locationEdit->setText("");
+    quantityEdit->setText("");
+    description->setText("");
 }
 
 AddPage::~AddPage()

@@ -61,7 +61,7 @@ private:
     QLineEdit *locationEdit;
     QLineEdit *quantityEdit;
 
-
+    void clearFields();
 };
 
 #endif // ADDPAGE_H

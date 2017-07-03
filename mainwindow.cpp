@@ -3,6 +3,7 @@
 #include "pages.h"
 #include "homepage.h"
 #include "addpage.h"
+#include "Pages/searchpage.h"
 #include "database/dbmanager.h"
 #include "borderlayout.h"
 #include <QVBoxLayout>
@@ -41,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pagesWidget->addWidget(fakePage);
     pagesWidget->addWidget(new Homepage(pagesWidget));
     pagesWidget->addWidget(new AddPage(db));
-    pagesWidget->addWidget(new UpdatePage);
+    pagesWidget->addWidget(new SearchPage);
     pagesWidget->addWidget(new QueryPage);
 
     // index 1 is the real first page
