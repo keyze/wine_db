@@ -58,7 +58,7 @@ private:
     QLineEdit *regionEdit;
     QLineEdit *vineyardEdit;
     QLineEdit *priceEdit;
-    QLineEdit *locationEdit;
+    QComboBox *locationEdit;
     QLineEdit *quantityEdit;
 
     void clearFields();

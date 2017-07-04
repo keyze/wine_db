@@ -89,7 +89,8 @@ QComboBox *AddPage::addWhites()
     whiteFont.setPixelSize(20);
 
     whiteBox->setFont(whiteFont);
-    whiteBox->insertItem(0, "Chardonay");
+    whiteBox->insertItem(0, "");
+    whiteBox->addItem("Chardonay");
     whiteBox->addItem("Riesling");
     return whiteBox;
 
@@ -104,7 +105,8 @@ QComboBox *AddPage::addReds()
     redFont.setPixelSize(20);
 
     redBox->setFont(redFont);
-    redBox->insertItem(0, "Shiraz");
+    redBox->insertItem(0, "");
+    redBox->addItem("Shiraz");
     redBox->addItem("Merlot");
     redBox->addItem("Pinot Noir");
     return redBox;
@@ -119,7 +121,8 @@ QComboBox *AddPage::addRoses()
     roseFont.setPixelSize(20);
 
     roseBox->setFont(roseFont);
-    roseBox->insertItem(0, "Grenache");
+    roseBox->insertItem(0, "");
+    roseBox->addItem("Grenache");
     roseBox->addItem("Tempranillo");
     return roseBox;
 }
@@ -142,8 +145,15 @@ QGroupBox *AddPage::addWineParameters()
     priceEdit = new QLineEdit;
     priceEdit->setValidator(new QDoubleValidator(0.00, 20000.00, 2, priceEdit));
 
-    locationEdit = new QLineEdit;
     quantityEdit = new QLineEdit;
+
+    locationEdit = new QComboBox;
+    locationEdit->insertItem(0, "");
+    locationEdit->addItem("Work Cellar");
+    locationEdit->addItem("Home Cellar: Top Shelf");
+    locationEdit->addItem("Home Cellar: Second Shelf");
+    locationEdit->addItem("Home Cellar: Third Shelf");
+    locationEdit->addItem("Home Cellar: Bottom Shelf");
 
     QLabel *nameLabel = new QLabel(tr("Name of Wine:"));
     nameLabel->setFont(paramFont);
@@ -271,7 +281,7 @@ Wine* AddPage::createWine()
     QString vineyard = vineyardEdit->text();
     myWine->setVineyard(vineyard);
 
-    QString location = locationEdit->text();
+    QString location = locationEdit->currentText();
     myWine->setLocation(location);
 
     int vintage = vintageEdit->text().toInt();
@@ -310,9 +320,13 @@ void AddPage::clearFields()
     vineyardEdit->setText("");
     priceEdit->setText("");
 
-    locationEdit->setText("");
     quantityEdit->setText("");
     description->setText("");
+
+    locationEdit->setCurrentIndex(0);
+    redBox->setCurrentIndex(0);
+    whiteBox->setCurrentIndex(0);
+    roseBox->setCurrentIndex(0);
 }
 
 AddPage::~AddPage()
