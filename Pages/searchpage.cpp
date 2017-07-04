@@ -3,6 +3,7 @@
 #include <QHeaderView>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QTabWidget>
 #include <QSqlRelationalTableModel>
 #include <QSqlRelationalDelegate>
 
@@ -11,6 +12,8 @@ SearchPage::SearchPage(QWidget *parent) :
 {
     QVBoxLayout *searchLayout = new QVBoxLayout;
     QPushButton *searchButton = new QPushButton("Search");
+    QTabWidget *searchTab = new QTabWidget;
+
     model = initialiseModel();
    // model->setQuery("SELECT name FROM wines");
    // model->setHeaderData(0, Qt::Horizontal, QObject::tr("Name"));

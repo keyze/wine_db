@@ -32,7 +32,9 @@ SOURCES += \
     stuff.cpp \
     database/dbmanager.cpp \
     wine.cpp \
-    Pages/searchpage.cpp
+    Pages/searchpage.cpp \
+    Pages/quicksearch.cpp \
+    Pages/advancedsearch.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +45,9 @@ HEADERS += \
     stuff.h \
     database/dbmanager.h \
     wine.h \
-    Pages/searchpage.h
+    Pages/searchpage.h \
+    Pages/quicksearch.h \
+    Pages/advancedsearch.h
 
 FORMS += \
         mainwindow.ui

@@ -64,6 +64,18 @@ bool DbManager::printAllWines()
     return true;
 }
 
+QStringList DbManager::searchQuery(const QString &query)
+{
+   QSqlQuery sqlQuery(query);
+   QStringList options;
+
+   while (sqlQuery.next()) {
+       QString result = sqlQuery.value(0).toString();
+       options << result;
+   }
+   return options;
+}
+
 DbManager::~DbManager()
 {
     if (wine_db.isOpen()) {

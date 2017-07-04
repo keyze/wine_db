@@ -22,6 +22,8 @@ public:
 
     bool printAllWines();
 
+    QStringList searchQuery(const QString& query);
+
 private:
     QSqlDatabase wine_db;
 };
