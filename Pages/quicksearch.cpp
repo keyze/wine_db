@@ -6,8 +6,8 @@ QuickSearch::QuickSearch(DbManager *dbmanager, QWidget *parent) :
     QWidget(parent)
 {
     db = dbmanager;
-    QGridLayout layout;
-    initialiseParams(&layout);
+    QGridLayout *layout = new QGridLayout;
+    initialiseParams(layout);
     populateCellar();
     populateColour();
     populateName();
@@ -33,14 +33,14 @@ void QuickSearch::initialiseParams(QGridLayout *mainLayout)
     connect(varietybtn, SIGNAL(clicked(bool)), this, SLOT(varietyBtnPress()));
     connect(namebtn, SIGNAL(clicked(bool)), this, SLOT(nameBtnPress()));
 
-    mainLayout->addWidget(cellarbtn, 0, 0);
-    mainLayout->addWidget(searchCellar, 0, 1);
-    mainLayout->addWidget(colourbtn, 1, 0);
-    mainLayout->addWidget(searchCellar, 1, 1);
-    mainLayout->addWidget(varietybtn, 2, 0);
-    mainLayout->addWidget(searchVariety, 2, 1);
-    mainLayout->addWidget(namebtn, 3, 0);
-    mainLayout->addWidget(searchName, 3, 1);
+    mainLayout->addWidget(cellarbtn, 0, 1);
+    mainLayout->addWidget(searchCellar, 0, 0);
+    mainLayout->addWidget(colourbtn, 1, 1);
+    mainLayout->addWidget(searchColour, 1, 0);
+    mainLayout->addWidget(varietybtn, 2, 1);
+    mainLayout->addWidget(searchVariety, 2, 0);
+    mainLayout->addWidget(namebtn, 3, 1);
+    mainLayout->addWidget(searchName, 3, 0);
 
     setLayout(mainLayout);
 
@@ -97,20 +97,24 @@ QuickSearch::~QuickSearch()
 
 void QuickSearch::colourBtnPress()
 {
-    emit sigSearchColour();
+    QString colour = searchColour->currentText();
+    emit sigSearchColour(colour);
 }
 
 void QuickSearch::cellarBtnPress()
 {
-    emit sigSearchCellar();
+    QString cellar = searchCellar->currentText();
+    emit sigSearchCellar(cellar);
 }
 
 void QuickSearch::varietyBtnPress()
 {
-    emit sigSearchVariety();
+    QString variety = searchVariety->currentText();
+    emit sigSearchVariety(variety);
 }
 
 void QuickSearch::nameBtnPress()
 {
-    emit sigSearchName();
+    QString name = searchName->currentText();
+    emit sigSearchName(name);
 }

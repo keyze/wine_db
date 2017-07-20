@@ -1,6 +1,7 @@
 #ifndef SEARCHPAGE_H
 #define SEARCHPAGE_H
 
+#include "database/dbmanager.h"
 #include <QObject>
 #include <QWidget>
 #include <QSqlQueryModel>
@@ -10,11 +11,17 @@ class SearchPage : public QWidget
 {
     Q_OBJECT
 public:
-    SearchPage(QWidget *parent=0);
+    SearchPage(DbManager *dbManager, QWidget *parent=0);
     ~SearchPage();
 
 private slots:
-    void searchDatabase();
+    void searchDatabase(QString query);
+
+    void quickSearchColour(QString colour);
+    void quickSearchCellar(QString cellar);
+    void quickSearchVariety(QString variety);
+    void quickSearchName(QString name);
+
 
 private:
     QSqlQueryModel *initialiseModel();

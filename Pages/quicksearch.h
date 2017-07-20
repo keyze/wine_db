@@ -15,10 +15,10 @@ public:
     ~QuickSearch();
 
 signals:
-    void sigSearchColour();
-    void sigSearchCellar();
-    void sigSearchVariety();
-    void sigSearchName();
+    void sigSearchColour(QString);
+    void sigSearchCellar(QString);
+    void sigSearchVariety(QString);
+    void sigSearchName(QString);
 
 private slots:
     void colourBtnPress();
