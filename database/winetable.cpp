@@ -1,5 +1,6 @@
 #include "winetable.h"
 #include <QMapIterator>
+#include <QDebug>
 
 WineTable::WineTable(QSqlQueryModel *parent) :
     QSqlQueryModel(parent)
@@ -28,7 +29,7 @@ void WineTable::searchColour(QString colour)
 void WineTable::searchCellar(QString cellar)
 {
 
-    QString query = "SELECT colour, variety, name, region, vineyard, vintage FROM wines where cellar='" + cellar + "'";
+    QString query = "SELECT colour, variety, name, region, vineyard, vintage FROM wines where location='" + cellar + "'";
     this->setQuery(query);
 }
 
@@ -65,12 +66,15 @@ void WineTable::searchQuery(QMap<QString, QString> wineAttributes)
     QString query = "SELECT colour, variety, name, region, vineyard, vintage FROM wines where quantity>0 ";
     QMapIterator<QString, QString> i(wineAttributes);
     while (i.hasNext()) {
+        i.next();
         if (i.value() != "") {
             query = query + "AND " + i.key() + "='" + i.value() + "' ";
         }
 
 
     }
+
+    qDebug() << query;
     this->setQuery(query);
 }
 
