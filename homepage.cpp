@@ -40,6 +40,7 @@ Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
 
     connect(addButton, SIGNAL(clicked(bool)), this, SLOT(goToAddPage()));
     connect(searchButton, SIGNAL(clicked(bool)), this, SLOT(goToSearchPage()));
+    connect(removeButton, SIGNAL(clicked(bool)), this, SLOT(goToDrinkPage()));
 
     addButton->setFixedHeight(200);
     addButton->setFixedWidth(1100);
@@ -93,4 +94,9 @@ void Homepage::goToAddPage()
 void Homepage::goToSearchPage()
 {
     changePage->setCurrentIndex(3);
+}
+
+void Homepage::goToDrinkPage()
+{
+   changePage->setCurrentIndex(4);
 }
