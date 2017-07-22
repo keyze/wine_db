@@ -13,6 +13,7 @@
 #include <QPalette>
 #include <QToolBar>
 #include <QAction>
+#include <QStatusBar>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,15 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     widget->setPalette(pal);
     setCentralWidget(widget);
 
-    QWidget *topFiller = new QWidget;
-    topFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    infoLabel = new QLabel(tr("<i>Choose a menu option, or right-click to "
-                              "invoke a context menu</i>"));
-
     m_value = 0;
-
-    QWidget *bottomFiller = new QWidget;
-    bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     QWidget *fakePage = new QWidget;
     pagesWidget = new QStackedWidget;
@@ -67,6 +60,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setMinimumSize(160, 160);
     resize(480, 320);
     setUnifiedTitleAndToolBarOnMac(true);
+    this->statusBar()->setDisabled(true);
+
 }
 
 void MainWindow::createActions()
@@ -80,11 +75,6 @@ void MainWindow::createActions()
     openAct->setShortcuts(QKeySequence::Open);
     openAct->setStatusTip(tr("Open an existing file"));
     connect(openAct, &QAction::triggered, this, &MainWindow::open);
-
-    saveAct = new QAction(tr("&Save"), this);
-    saveAct->setShortcuts(QKeySequence::Save);
-    saveAct->setStatusTip(tr("Save the document to disk"));
-    connect(saveAct, &QAction::triggered, this, &MainWindow::save);
 
     printAct = new QAction(tr("&Print..."), this);
     printAct->setShortcuts(QKeySequence::Print);
@@ -104,7 +94,6 @@ void MainWindow::createMenus()
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
-    fileMenu->addAction(saveAct);
     fileMenu->addAction(printAct);
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
@@ -132,7 +121,6 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
     QMenu menu(this);
     menu.addAction(newAct);
     menu.addAction(openAct);
-    menu.addAction(saveAct);
     menu.exec(event->globalPos());
 
 }
@@ -148,25 +136,19 @@ void MainWindow::changePage(int current)
 
 void MainWindow::newFile()
 {
-    infoLabel->setText(tr("Invoked <b>File|New</b>"));
+
     changePage(1);
 
 }
 
-void MainWindow::save()
-{
-    infoLabel->setText(tr("Invoked <b>File|Save</b>"));
-}
 
 void MainWindow::open()
 {
-    infoLabel->setText(tr("Invoked <b>File|Open</b>"));
     changePage(2);
 }
 
 void MainWindow::print()
 {
-    infoLabel->setText(tr("Invoked <b>File|Print</b>"));
     changePage(0);
 }
 

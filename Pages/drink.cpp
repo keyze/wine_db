@@ -20,7 +20,7 @@ Drink::Drink(QWidget *parent) : QWidget(parent), currentRow(0)
     QGridLayout* layout = setupSearch();
     layout->addWidget(find, 4, 0, 1, 4);
     layout->addWidget(view, 5, 0, 1, 4);
-    layout->addWidget(drink, 6, 0, 1, 4);
+    layout->addWidget(drink, 6, 2, 1, 2);
     this->setLayout(layout);
 
     connect(find, SIGNAL(clicked(bool)), this, SLOT(findWine()));
@@ -38,14 +38,12 @@ QGridLayout* Drink::setupSearch()
     QLabel *varietylbl = new QLabel(tr("Variety"));
     QLabel *vineyardlbl = new QLabel(tr("Vineyard"));
     QLabel *quantitylbl = new QLabel(tr("Quantity"));
-    QLabel *regionlbl = new QLabel(tr("Region"));
 
     colourEdit = new QLineEdit;
     nameEdit = new QLineEdit;
     vintageEdit = new QLineEdit;
     varietyEdit = new QLineEdit;
     vineyardEdit = new QLineEdit;
-    regionEdit = new QLineEdit;
     cellarEdit = new QLineEdit;
     quantityEdit = new QLineEdit;
 
@@ -67,11 +65,8 @@ QGridLayout* Drink::setupSearch()
     layout->addWidget(vintagelbl, 2, 2);
     layout->addWidget(vintageEdit, 2, 3);
 
-    layout->addWidget(regionlbl, 3, 0);
-    layout->addWidget(regionEdit, 3, 1);
-
-    layout->addWidget(quantitylbl, 3, 2);
-    layout->addWidget(quantityEdit, 3, 3);
+    layout->addWidget(quantitylbl, 6, 0);
+    layout->addWidget(quantityEdit, 6, 1);
 
     return layout;
 
@@ -86,7 +81,6 @@ void Drink::findWine()
     wineMap.insert("vintage", vintageEdit->text());
     wineMap.insert("variety", varietyEdit->text());
     wineMap.insert("vineyard", vineyardEdit->text());
-    wineMap.insert("region", regionEdit->text());
 
     wineTable->searchQuery(wineMap);
 }
@@ -98,6 +92,9 @@ void Drink::drinkWine()
 
 void Drink::onRowChanged(QModelIndex index)
 {
+    int row = index.row();
     qDebug() << index.row();
+    QString colour = index.sibling(row, 0).data().toString();
+    qDebug() << colour;
 }
 

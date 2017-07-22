@@ -32,7 +32,6 @@ private:
     QLineEdit* vintageEdit;
     QLineEdit* varietyEdit;
     QLineEdit* vineyardEdit;
-    QLineEdit* regionEdit;
     QLineEdit* quantityEdit;
 
     int currentRow;

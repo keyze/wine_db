@@ -23,7 +23,6 @@ private slots:
     void changePage(int);
     void newFile();
     void open();
-    void save();
     void print();
 
 
@@ -49,11 +48,10 @@ private:
 
     QAction *newAct;
     QAction *openAct;
-    QAction *saveAct;
     QAction *printAct;
     QAction *exitAct;
 
-    QLabel *infoLabel;
+
 };
 
 #endif // MAINWINDOW_H
