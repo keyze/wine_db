@@ -94,7 +94,19 @@ void Drink::onRowChanged(QModelIndex index)
 {
     int row = index.row();
     qDebug() << index.row();
+    QString vineyard;
+    QString name;
+    QString vintage;
+    QString variety;
+   // QString colour;
+    QString region;
     QString colour = index.sibling(row, 0).data().toString();
     qDebug() << colour;
 }
 
+//this->setHeaderData(0, Qt::Horizontal, QObject::tr("Colour"));
+//this->setHeaderData(1, Qt::Horizontal, QObject::tr("Variety"));
+//this->setHeaderData(2, Qt::Horizontal, QObject::tr("Name"));
+//this->setHeaderData(3, Qt::Horizontal, QObject::tr("Region"));
+//this->setHeaderData(4, Qt::Horizontal, QObject::tr("Vineyard"));
+//this->setHeaderData(5, Qt::Horizontal, QObject::tr("Vintage"));
