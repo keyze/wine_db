@@ -6,14 +6,14 @@
 #include <QLineEdit>
 #include <QGridLayout>
 #include <QModelIndex>
-
+#include "database/dbmanager.h"
 #include "database/winetable.h"
-
+#include <QMap>
 class Drink : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Drink(QWidget *parent = nullptr);
+    explicit Drink(DbManager* db, QWidget *parent = nullptr);
 
 signals:
 
@@ -34,8 +34,10 @@ private:
     QLineEdit* vineyardEdit;
     QLineEdit* quantityEdit;
 
+    QMap<QString, QString> drinkMap;
     int currentRow;
     WineTable *wineTable;
+    DbManager* theDb;
     QGridLayout *setupSearch();
 };
 

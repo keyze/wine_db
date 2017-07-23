@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pagesWidget->addWidget(new Homepage(pagesWidget));
     pagesWidget->addWidget(new AddPage(db));
     pagesWidget->addWidget(new SearchPage(db));
-    pagesWidget->addWidget(new Drink);
+    pagesWidget->addWidget(new Drink(db));
 
 
     pagesWidget->setCurrentIndex(1);
@@ -57,8 +57,9 @@ MainWindow::MainWindow(QWidget *parent) :
     createToolBar();
 
     setWindowTitle(tr("Johnnys Wine Database!"));
-    setMinimumSize(160, 160);
-    resize(480, 320);
+  //  setMinimumSize(160, 160);
+  //  resize(480, 320);
+    this->showMaximized();
     setUnifiedTitleAndToolBarOnMac(true);
     this->statusBar()->setDisabled(true);
 

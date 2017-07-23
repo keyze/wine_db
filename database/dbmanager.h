@@ -3,7 +3,7 @@
 
 #include <QSqlDatabase>
 #include <wine.h>
-
+#include <QMap>
 
 class DbManager
 {
@@ -16,6 +16,8 @@ public:
 
     bool addWine(Wine* wine);
 
+    void decrementQuantity(QMap<QString, QString> wineParams, int amount);
+
     bool removeWine();
 
     bool wineExists();
@@ -24,8 +26,11 @@ public:
 
     QStringList searchQuery(const QString& query);
 
+    int getQuantity(QMap<QString, QString> wineParams);
 private:
     QSqlDatabase wine_db;
+
+
 };
 
 #endif // DBMANAGER_H

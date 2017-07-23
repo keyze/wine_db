@@ -46,8 +46,47 @@ bool DbManager::addWine(Wine *wine)
 
     return insertQuery.exec();
 
+}
 
-    return true;
+
+int DbManager::getQuantity(QMap<QString, QString> wineParams)
+{
+    QString query = "SELECT quantity FROM wines where quantity>=0 ";
+    QSqlQuery theQuery;
+    QMapIterator<QString, QString> i(wineParams);
+    while (i.hasNext()) {
+        i.next();
+        if (i.value() != "") {
+            query = query + "AND " + i.key() + "='" + i.value() + "' ";
+        }
+
+    }
+
+    theQuery.exec(query);
+    while(theQuery.next()) {
+        return theQuery.value(0).toInt();
+    }
+
+}
+
+void DbManager::decrementQuantity(QMap<QString, QString> wineParams, int amount)
+{
+    int originalQuantity = getQuantity(wineParams);
+    QString newQuantity = QString::number(originalQuantity - amount);
+
+    QString query = "UPDATE wines SET quantity=" + newQuantity + " where quantity>=0 ";
+    QMapIterator<QString, QString> i(wineParams);
+    while (i.hasNext()) {
+        i.next();
+        if (i.value() != "") {
+            query = query + "AND " + i.key() + "='" + i.value() + "' ";
+        }
+
+    }
+    qDebug() << query;
+    QSqlQuery decrementQuery;
+    decrementQuery.exec(query);
+
 }
 
 bool DbManager::removeWine()
@@ -64,6 +103,7 @@ bool DbManager::printAllWines()
 {
     return true;
 }
+
 
 QStringList DbManager::searchQuery(const QString &query)
 {

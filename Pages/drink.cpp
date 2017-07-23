@@ -6,7 +6,7 @@
 #include <QMap>
 #include <QDebug>
 
-Drink::Drink(QWidget *parent) : QWidget(parent), currentRow(0)
+Drink::Drink(DbManager *db, QWidget *parent) : QWidget(parent),  currentRow(0), theDb(db)
 {
     QPushButton *find = new QPushButton(tr("find"));
     QPushButton *drink = new QPushButton(tr("Drink"));
@@ -82,26 +82,40 @@ void Drink::findWine()
     wineMap.insert("variety", varietyEdit->text());
     wineMap.insert("vineyard", vineyardEdit->text());
 
+
     wineTable->searchQuery(wineMap);
 }
 
 void Drink::drinkWine()
 {
-
+    if (quantityEdit->text() != "") {
+        theDb->decrementQuantity(drinkMap, quantityEdit->text().toInt());
+    }
 }
 
 void Drink::onRowChanged(QModelIndex index)
 {
     int row = index.row();
     qDebug() << index.row();
-    QString vineyard;
-    QString name;
-    QString vintage;
-    QString variety;
-   // QString colour;
-    QString region;
-    QString colour = index.sibling(row, 0).data().toString();
-    qDebug() << colour;
+    QString vineyard = index.sibling(row, 0).data().toString();
+    QString name = index.sibling(row, 1).data().toString();
+    QString vintage = index.sibling(row, 2).data().toString();
+    QString variety = index.sibling(row, 3).data().toString();
+    QString colour = index.sibling(row, 4).data().toString();
+    QString region = index.sibling(row, 5).data().toString();
+
+    drinkMap.clear();
+    drinkMap.insert("colour", colour);
+    drinkMap.insert("region", region);
+    drinkMap.insert("name", name);
+    drinkMap.insert("vintage", vintage);
+    drinkMap.insert("variety", variety);
+    drinkMap.insert("vineyard", vineyard);
+
+
+
+  //  QMap map;
+
 }
 
 //this->setHeaderData(0, Qt::Horizontal, QObject::tr("Colour"));

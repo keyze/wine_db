@@ -40,7 +40,7 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
     view->show();
     this->setLayout(searchLayout);
 
-    connect(searchButton, SIGNAL(clicked(bool)), this, SLOT(searchDatabase(QString)));
+  //  connect(searchButton, SIGNAL(clicked(bool)), this, SLOT(searchDatabase(QString)));
     connect(qsearch, SIGNAL(sigSearchCellar(QString)), this, SLOT(quickSearchCellar(QString)));
     connect(qsearch, SIGNAL(sigSearchColour(QString)), this, SLOT(quickSearchColour(QString)));
     connect(qsearch, SIGNAL(sigSearchName(QString)), this, SLOT(quickSearchName(QString)));
