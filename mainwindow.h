@@ -24,7 +24,10 @@ private slots:
     void newFile();
     void open();
     void print();
-
+    void ribbonAdd();
+    void ribbonDrink();
+    void ribbonHome();
+    void ribbonSearch();
 
 protected:
 #ifndef QT_NO_CONTEXTMENU
@@ -46,11 +49,11 @@ private:
     QStackedWidget *pagesWidget;
     QMenu *fileMenu;
 
-    QAction *newAct;
-    QAction *openAct;
-    QAction *printAct;
-    QAction *exitAct;
-
+    QAction* goHome;
+    QAction* goAddWine;
+    QAction* goDrinkWine;
+    QAction* search;
+    QAction* exitAct;
 
 };
 

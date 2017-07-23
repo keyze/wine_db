@@ -66,24 +66,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::createActions()
 {
-    newAct = new QAction(tr("&New"), this);
-    newAct->setShortcuts(QKeySequence::New);
-    newAct->setStatusTip(tr("Create a new file"));
-    connect(newAct, &QAction::triggered, this, &MainWindow::newFile);
-
-    openAct = new QAction(tr("&Open..."), this);
-    openAct->setShortcuts(QKeySequence::Open);
-    openAct->setStatusTip(tr("Open an existing file"));
-    connect(openAct, &QAction::triggered, this, &MainWindow::open);
-
-    printAct = new QAction(tr("&Print..."), this);
-    printAct->setShortcuts(QKeySequence::Print);
-    printAct->setStatusTip(tr("Print the document"));
-    connect(printAct, &QAction::triggered, this, &MainWindow::print);
-
-    exitAct = new QAction(tr("E&xit"), this);
-    exitAct->setShortcuts(QKeySequence::Quit);
-    exitAct->setStatusTip(tr("Exit the application"));
+    QPixmap home(":/res/pictures/home.png");
+    QPixmap addWine(":/res/pictures/transparent-wine.png");
+    QPixmap drinkWine(":/res/pictures/drink-wine-512.png");
+    QPixmap searchPic(":/res/pictures/search.png");
+    const QIcon homeIcon(home);
+    const QIcon wineIcon(addWine);
+    const QIcon drinkIcon(drinkWine);
+    const QIcon searchIcon(searchPic);
+    goHome = new QAction(homeIcon, tr("&Home"), this);
+    goAddWine = new QAction(wineIcon, tr("&Add Wine"), this);
+    goDrinkWine = new QAction(drinkIcon, tr("&Drink Wine"), this);
+    search = new QAction(searchIcon, tr("&Search"), this);
+    exitAct = new QAction(tr("&Exit"), this);
+    goHome->setStatusTip(tr("Go Home"));
+    goAddWine->setStatusTip(tr("Add Wine"));
+    goDrinkWine->setStatusTip(tr("Drink Wine"));
+    search->setStatusTip(tr("Search"));
+    connect(goHome, &QAction::triggered, this,  &MainWindow::ribbonHome);
+    connect(goAddWine, &QAction::triggered, this, &MainWindow::ribbonAdd);
+    connect(goDrinkWine, &QAction::triggered, this, &MainWindow::ribbonDrink);
+    connect(search, &QAction::triggered, this, &MainWindow::ribbonSearch);
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
 
 
@@ -92,9 +95,10 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(newAct);
-    fileMenu->addAction(openAct);
-    fileMenu->addAction(printAct);
+    fileMenu->addAction(goHome);
+    fileMenu->addAction(goAddWine);
+    fileMenu->addAction(search);
+    fileMenu->addAction(goDrinkWine);
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
 
@@ -104,12 +108,11 @@ void MainWindow::createMenus()
 void MainWindow::createToolBar()
 {
     QToolBar* myTools = this->addToolBar(tr("My tools"));
-    QPixmap home(":/res/pictures/home-icon-73307.png");
-    const QIcon homeIcon(home);
-    QAction* goHome = new QAction(homeIcon, tr("&Home"), this);
-    goHome->setStatusTip(tr("Go Home"));
-    connect(goHome, &QAction::triggered, this,  &MainWindow::newFile);
+
     myTools->addAction(goHome);
+    myTools->addAction(goAddWine);
+    myTools->addAction(search);
+    myTools->addAction(goDrinkWine);
     myTools->setMovable(false);
 }
 
@@ -119,8 +122,10 @@ void MainWindow::createToolBar()
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
-    menu.addAction(newAct);
-    menu.addAction(openAct);
+    menu.addAction(goHome);
+    menu.addAction(goAddWine);
+    menu.addAction(search);
+    menu.addAction(goDrinkWine);
     menu.exec(event->globalPos());
 
 }
@@ -150,6 +155,26 @@ void MainWindow::open()
 void MainWindow::print()
 {
     changePage(0);
+}
+
+void MainWindow::ribbonAdd()
+{
+    changePage(2);
+}
+
+void MainWindow::ribbonDrink()
+{
+    changePage(4);
+}
+
+void MainWindow::ribbonHome()
+{
+    changePage(1);
+}
+
+void MainWindow::ribbonSearch()
+{
+    changePage(3);
 }
 
 

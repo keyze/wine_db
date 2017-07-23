@@ -6,5 +6,10 @@
         <file>pictures/ruou.jpg</file>
         <file>database/wine.db</file>
         <file>pictures/home-icon-73307.png</file>
+        <file>pictures/drink-wine-512.png</file>
+        <file>pictures/wine-icon-11.jpg</file>
+        <file>pictures/transparent-wine.png</file>
+        <file>pictures/search.png</file>
+        <file>pictures/home.png</file>
     </qresource>
 </RCC>
