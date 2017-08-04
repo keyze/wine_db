@@ -85,4 +85,7 @@ void WineTable::searchQuery(QMap<QString, QString> wineAttributes)
     initTable();
 }
 
-
+void WineTable::clearTable()
+{
+    this->clear();
+}

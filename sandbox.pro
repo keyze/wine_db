@@ -36,7 +36,8 @@ SOURCES += \
     Pages/quicksearch.cpp \
     Pages/advancedsearch.cpp \
     Pages/drink.cpp \
-    database/winetable.cpp
+    database/winetable.cpp \
+    winebox.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -51,7 +52,8 @@ HEADERS += \
     Pages/quicksearch.h \
     Pages/advancedsearch.h \
     Pages/drink.h \
-    database/winetable.h
+    database/winetable.h \
+    winebox.h
 
 FORMS += \
         mainwindow.ui

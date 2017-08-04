@@ -7,7 +7,7 @@
 #include <QStackedWidget>
 #include <QRadioButton>
 #include <QTextEdit>
-
+#include "winebox.h"
 #include "wine.h"
 #include "database/dbmanager.h"
 
@@ -31,6 +31,7 @@ signals:
 private:
 
     Wine* createWine();
+    WineBox* theBox;
     DbManager* theDB;
 
     QFont groupFont;
@@ -62,6 +63,7 @@ private:
     QLineEdit *quantityEdit;
 
     void clearFields();
+    bool isMinimum(Wine *theWine);
 };
 
 #endif // ADDPAGE_H

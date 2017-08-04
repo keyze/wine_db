@@ -20,6 +20,7 @@ public:
     void searchVariety(QString variety);
     void searchQuery(QMap<QString, QString> wineAttributes);
 
+    void clearTable();
 private:
     void initTable();
 

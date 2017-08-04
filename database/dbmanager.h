@@ -16,7 +16,7 @@ public:
 
     bool addWine(Wine* wine);
 
-    void decrementQuantity(QMap<QString, QString> wineParams, int amount);
+    bool decrementQuantity(QMap<QString, QString> wineParams, int amount);
 
     bool removeWine();
 

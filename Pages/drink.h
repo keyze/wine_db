@@ -8,7 +8,9 @@
 #include <QModelIndex>
 #include "database/dbmanager.h"
 #include "database/winetable.h"
+#include "winebox.h"
 #include <QMap>
+
 class Drink : public QWidget
 {
     Q_OBJECT
@@ -26,6 +28,8 @@ public slots:
 
 
 private:
+    WineBox* theBox;
+
     QLineEdit* colourEdit;
     QLineEdit* cellarEdit;
     QLineEdit* nameEdit;

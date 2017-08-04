@@ -10,12 +10,14 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QDoubleValidator>
+#include <QMessageBox>
 #include <QDebug>
 
 AddPage::AddPage(DbManager* db, QWidget *parent) :
     QWidget(parent), theDB(db)
 {
 
+    theBox = new WineBox;
     groupFont.setPixelSize(20);
     groupFont.setBold(true);
     groupFont.setItalic(true);
@@ -146,6 +148,7 @@ QGroupBox *AddPage::addWineParameters()
     priceEdit->setValidator(new QDoubleValidator(0.00, 20000.00, 2, priceEdit));
 
     quantityEdit = new QLineEdit;
+    quantityEdit->setValidator(new QIntValidator(0, 200 , quantityEdit));
 
     locationEdit = new QComboBox;
     locationEdit->insertItem(0, "");
@@ -229,6 +232,15 @@ QGroupBox *AddPage::setUpColours()
 
 }
 
+bool AddPage::isMinimum(Wine* theWine)
+{
+    if (theWine->getColour() != "" && theWine->getName() != "" && theWine->getVariety() != "" &&
+            QString::number(theWine->getVintage()) != "") {
+        return true;
+    }
+    return false;
+}
+
 void AddPage::setWineListRed()
 {
     emit AddPage::setWineList(1);
@@ -302,13 +314,26 @@ Wine* AddPage::createWine()
 void AddPage::addWinetoDB()
 {
     qDebug() << "Adding Wine";
+
+
     Wine* wine = createWine();
-    if ( theDB->addWine(wine) ) {
-        qDebug() << "Success";
+    if (isMinimum(wine)) {
+        if ( theDB->addWine(wine) ) {
+            qDebug() << "Success";
+            theBox->setSuccessAdd();
+
+        } else {
+            qDebug() << "Failed";
+            theBox->setFailAddGeneric();
+
+        }
+
+        clearFields();
     } else {
-        qDebug() << "Failed";
+        theBox->setFailAddMinimum();
+
     }
-    clearFields();
+    theBox->ok();
 
 }
 

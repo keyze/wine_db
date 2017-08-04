@@ -28,6 +28,11 @@ bool DbManager::isOpen() const
 
 bool DbManager::addWine(Wine *wine)
 {
+
+    if (!wineExists()) {
+        return false;
+    }
+
     QSqlQuery insertQuery;
     insertQuery.prepare("INSERT INTO wines (colour, variety, name, region, vineyard,"
                         "vintage, description, price, location, quantity)"
@@ -66,12 +71,18 @@ int DbManager::getQuantity(QMap<QString, QString> wineParams)
     while(theQuery.next()) {
         return theQuery.value(0).toInt();
     }
+    return -1;
 
 }
 
-void DbManager::decrementQuantity(QMap<QString, QString> wineParams, int amount)
+bool DbManager::decrementQuantity(QMap<QString, QString> wineParams, int amount)
 {
     int originalQuantity = getQuantity(wineParams);
+
+    if ((originalQuantity - amount) < 0) {
+        return false;
+    }
+
     QString newQuantity = QString::number(originalQuantity - amount);
 
     QString query = "UPDATE wines SET quantity=" + newQuantity + " where quantity>=0 ";
@@ -85,7 +96,7 @@ void DbManager::decrementQuantity(QMap<QString, QString> wineParams, int amount)
     }
     qDebug() << query;
     QSqlQuery decrementQuery;
-    decrementQuery.exec(query);
+    return decrementQuery.exec(query);
 
 }
 

@@ -11,6 +11,8 @@ Drink::Drink(DbManager *db, QWidget *parent) : QWidget(parent),  currentRow(0), 
     QPushButton *find = new QPushButton(tr("find"));
     QPushButton *drink = new QPushButton(tr("Drink"));
     QTableView *view = new QTableView;
+
+    theBox = new WineBox;
     wineTable = new WineTable;
     view->setModel(wineTable);
     view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -88,9 +90,23 @@ void Drink::findWine()
 
 void Drink::drinkWine()
 {
-    if (quantityEdit->text() != "") {
-        theDb->decrementQuantity(drinkMap, quantityEdit->text().toInt());
+    if (drinkMap.isEmpty()) {
+        theBox->setNoWineSelectedtoDrink();
+    } else if (quantityEdit->text() != "") {
+        if (theDb->decrementQuantity(drinkMap, quantityEdit->text().toInt())) {
+            theBox->setSuccessDrink();
+            wineTable->clearTable();
+            drinkMap.clear();
+
+        } else {
+            theBox->setFailNotEnoughDrink();
+        }
+
+    } else {
+        theBox->setNoQuantityDrink();
     }
+    theBox->ok();
+
 }
 
 void Drink::onRowChanged(QModelIndex index)
@@ -104,7 +120,7 @@ void Drink::onRowChanged(QModelIndex index)
     QString colour = index.sibling(row, 4).data().toString();
     QString region = index.sibling(row, 5).data().toString();
 
-    drinkMap.clear();
+
     drinkMap.insert("colour", colour);
     drinkMap.insert("region", region);
     drinkMap.insert("name", name);
