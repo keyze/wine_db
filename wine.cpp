@@ -14,6 +14,26 @@ Wine::Wine()
     location = "";
 }
 
+QMap<QString, QString> Wine::wineMap()
+{
+    QMap<QString, QString> theMap;
+    if (colour != "") {
+        theMap.insert("colour", colour);
+    }
+    if (variety != "") {
+        theMap.insert("variety", variety);
+    }
+
+    if (name != "") {
+        theMap.insert("name", name);
+    }
+
+    theMap.insert("vintage", QString::number(vintage));
+
+
+    return theMap;
+}
+
 void Wine::setColour(QString &newColour)
 {
     colour = newColour;

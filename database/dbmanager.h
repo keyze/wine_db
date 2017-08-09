@@ -18,9 +18,11 @@ public:
 
     bool decrementQuantity(QMap<QString, QString> wineParams, int amount);
 
+    bool incrementQuantity(QMap<QString, QString> wineParams, int amount);
+
     bool removeWine();
 
-    bool wineExists();
+    bool wineExists(Wine* wine);
 
     bool printAllWines();
 
@@ -31,6 +33,7 @@ private:
     QSqlDatabase wine_db;
 
 
+    bool updateQuantity(QMap<QString, QString> wineParams, QString newQuantity);
 };
 
 #endif // DBMANAGER_H

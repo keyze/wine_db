@@ -63,6 +63,7 @@ private:
     QLineEdit *quantityEdit;
 
     void clearFields();
+    QString checkCase(QString &field);
     bool isMinimum(Wine *theWine);
 };
 

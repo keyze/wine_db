@@ -235,7 +235,7 @@ QGroupBox *AddPage::setUpColours()
 bool AddPage::isMinimum(Wine* theWine)
 {
     if (theWine->getColour() != "" && theWine->getName() != "" && theWine->getVariety() != "" &&
-            QString::number(theWine->getVintage()) != "") {
+            QString::number(theWine->getVintage()) != "" && theWine->getQuantity() > 0) {
         return true;
     }
     return false;
@@ -287,7 +287,8 @@ Wine* AddPage::createWine()
     QString region = regionEdit->text();
     myWine->setRegion(region);
 
-    QString name = nameEdit->text();
+    QString nameText = nameEdit->text();
+    QString name = checkCase(nameText);
     myWine->setName(name);
 
     QString vineyard = vineyardEdit->text();
@@ -318,7 +319,11 @@ void AddPage::addWinetoDB()
 
     Wine* wine = createWine();
     if (isMinimum(wine)) {
-        if ( theDB->addWine(wine) ) {
+        if (theDB->wineExists(wine)) {
+            qDebug() << "Exists";
+            theDB->incrementQuantity(wine->wineMap(), quantityEdit->text().toInt());
+            theBox->setSuccessAdd();
+        } else if ( theDB->addWine(wine) ) {
             qDebug() << "Success";
             theBox->setSuccessAdd();
 
@@ -352,6 +357,21 @@ void AddPage::clearFields()
     redBox->setCurrentIndex(0);
     whiteBox->setCurrentIndex(0);
     roseBox->setCurrentIndex(0);
+}
+
+QString AddPage::checkCase(QString &field)
+{
+    QStringList splitfield = field.split(" ");
+    QString newField = "";
+
+    foreach(QString part, splitfield) {
+        QString lower = part.toLower();
+        lower[0] = lower[0].toUpper();
+
+        newField = newField + lower + " ";
+    }
+
+    return newField.remove(-1, 1);
 }
 
 AddPage::~AddPage()

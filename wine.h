@@ -2,12 +2,15 @@
 #define WINE_H
 
 #include <QString>
+#include <QMap>
 
 class Wine
 {
 public:
     Wine();
     ~Wine();
+
+    QMap<QString, QString> wineMap();
 
     void setColour(QString &newColour);
     QString getColour();

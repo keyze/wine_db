@@ -22,7 +22,7 @@ void WineBox::setFailAddMinimum()
 {
     this->setWindowTitle(tr("Failure"));
     this->setText(tr("I'm sorry you have failed to add the wine to your collection."));
-    this->setInformativeText("Please include a minimum of Name, Vintage, Colour and Variety to add your wine.");
+    this->setInformativeText("Please include a minimum of Name, Vintage, Colour, Variety and Quantity to add your wine.");
 }
 
 void WineBox::setSuccessDrink()

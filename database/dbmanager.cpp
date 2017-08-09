@@ -29,9 +29,9 @@ bool DbManager::isOpen() const
 bool DbManager::addWine(Wine *wine)
 {
 
-    if (!wineExists()) {
-        return false;
-    }
+//    if (!wineExists()) {
+//        return false;
+//    }
 
     QSqlQuery insertQuery;
     insertQuery.prepare("INSERT INTO wines (colour, variety, name, region, vineyard,"
@@ -66,7 +66,7 @@ int DbManager::getQuantity(QMap<QString, QString> wineParams)
         }
 
     }
-
+    qDebug() << "THE query " << query;
     theQuery.exec(query);
     while(theQuery.next()) {
         return theQuery.value(0).toInt();
@@ -84,7 +84,13 @@ bool DbManager::decrementQuantity(QMap<QString, QString> wineParams, int amount)
     }
 
     QString newQuantity = QString::number(originalQuantity - amount);
+    return updateQuantity(wineParams, newQuantity);
 
+
+}
+
+bool DbManager::updateQuantity(QMap<QString, QString> wineParams, QString newQuantity)
+{
     QString query = "UPDATE wines SET quantity=" + newQuantity + " where quantity>=0 ";
     QMapIterator<QString, QString> i(wineParams);
     while (i.hasNext()) {
@@ -95,9 +101,15 @@ bool DbManager::decrementQuantity(QMap<QString, QString> wineParams, int amount)
 
     }
     qDebug() << query;
-    QSqlQuery decrementQuery;
-    return decrementQuery.exec(query);
+    QSqlQuery theQuery;
+    return theQuery.exec(query);
+}
 
+bool DbManager::incrementQuantity(QMap<QString, QString> wineParams, int amount)
+{
+    QString newQuantity = QString::number(getQuantity(wineParams) + amount);
+    qDebug() << "The amount " << amount << newQuantity << getQuantity(wineParams);
+    return updateQuantity(wineParams, newQuantity);
 }
 
 bool DbManager::removeWine()
@@ -105,9 +117,18 @@ bool DbManager::removeWine()
     return true;
 }
 
-bool DbManager::wineExists()
+bool DbManager::wineExists(Wine *wine)
 {
-    return true;
+    QString query = "Select * from wines where name='" + wine->getName() + "' and " +
+            "vintage='" + QString::number(wine->getVintage()) + "' and " + "colour='" + wine->getColour() +
+            "' and " + "variety='" + wine->getVariety() + "'";
+
+    QStringList wines = searchQuery(query);
+    if (wines.length() > 0) {
+        return true;
+    }
+
+    return false;
 }
 
 bool DbManager::printAllWines()
@@ -123,6 +144,7 @@ QStringList DbManager::searchQuery(const QString &query)
 
    while (sqlQuery.next()) {
        QString result = sqlQuery.value(0).toString();
+
        options << result;
    }
    return options;
