@@ -16,12 +16,13 @@ void WineTable::initTable()
     this->setHeaderData(3, Qt::Horizontal, QObject::tr("Variety"));
     this->setHeaderData(4, Qt::Horizontal, QObject::tr("Colour"));
     this->setHeaderData(5, Qt::Horizontal, QObject::tr("Region"));
+    this->setHeaderData(6, Qt::Horizontal, QObject::tr("Quantity"));
 
 }
 
 void WineTable::searchColour(QString colour)
 {
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region FROM wines where colour ='" + colour + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where colour ='" + colour + "'";
     this->setQuery(query);
     initTable();
 
@@ -30,7 +31,7 @@ void WineTable::searchColour(QString colour)
 void WineTable::searchCellar(QString cellar)
 {
 
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region FROM wines where location='" + cellar + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where location='" + cellar + "'";
     this->setQuery(query);
     initTable();
 }
@@ -38,7 +39,7 @@ void WineTable::searchCellar(QString cellar)
 void WineTable::searchVintage(QString vintage)
 {
 
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region FROM wines where vintage='" + vintage + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where vintage='" + vintage + "'";
     this->setQuery(query);
     initTable();
 }
@@ -46,7 +47,7 @@ void WineTable::searchVintage(QString vintage)
 void WineTable::searchVineyard(QString vineyard)
 {
 
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region FROM wines where vineyard='" + vineyard + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where vineyard='" + vineyard + "'";
     this->setQuery(query);
     initTable();
 }
@@ -54,7 +55,7 @@ void WineTable::searchVineyard(QString vineyard)
 void WineTable::searchName(QString name)
 {
 
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region FROM wines where name='" + name + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where name='" + name + "'";
     this->setQuery(query);
     initTable();
 }
@@ -62,14 +63,14 @@ void WineTable::searchName(QString name)
 void WineTable::searchVariety(QString variety)
 {
 
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region FROM wines where variety='" + variety + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where variety='" + variety + "'";
     this->setQuery(query);
     initTable();
 }
 
 void WineTable::searchQuery(QMap<QString, QString> wineAttributes)
 {
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region FROM wines where quantity>0 ";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where quantity>0 ";
     QMapIterator<QString, QString> i(wineAttributes);
     while (i.hasNext()) {
         i.next();
