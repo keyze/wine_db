@@ -23,6 +23,8 @@ private slots:
     void setWineListRed();
     void setWineListWhite();
     void setWineListRose();
+    void setWineListDessert();
+    void setWineListSparkling();
     void addWinetoDB();
 
 signals:
@@ -43,14 +45,20 @@ private:
     QRadioButton* red;
     QRadioButton* white;
     QRadioButton* rose;
+    QRadioButton* dessert;
+    QRadioButton* sparkling;
 
     QComboBox* redBox;
     QComboBox* whiteBox;
     QComboBox* roseBox;
+    QComboBox* dessertBox;
+    QComboBox* sparklingBox;
 
-    QComboBox* addReds();
-    QComboBox* addWhites();
-    QComboBox* addRoses();
+    void addReds();
+    void addWhites();
+    void addRoses();
+    void addDessert();
+    void addSparkling();
 
     QGroupBox *addWineParameters();
 

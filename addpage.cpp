@@ -33,14 +33,18 @@ AddPage::AddPage(DbManager* db, QWidget *parent) :
     QGroupBox *varietyBox = new QGroupBox(tr("Variety:"));
     varietyBox->setFont(groupFont);
 
-    QComboBox *whiteBox = addWhites();
-    QComboBox *redBox = addReds();
-    QComboBox *roseBox = addRoses();
+    addWhites();
+    addReds();
+    addRoses();
+    addSparkling();
+    addDessert();
 
     variety = new QStackedWidget;
     variety->addWidget(whiteBox);
     variety->addWidget(redBox);
     variety->addWidget(roseBox);
+    variety->addWidget(sparklingBox);
+    variety->addWidget(dessertBox);
 
     QVBoxLayout *varietyLayout = new QVBoxLayout;
     varietyLayout->addWidget(variety);
@@ -83,7 +87,7 @@ AddPage::AddPage(DbManager* db, QWidget *parent) :
     connect(addWine, SIGNAL(clicked(bool)), this, SLOT(addWinetoDB()));
 }
 
-QComboBox *AddPage::addWhites()
+void AddPage::addWhites()
 {
     whiteBox = new QComboBox;
     whiteBox->setMaximumHeight(30);
@@ -92,13 +96,21 @@ QComboBox *AddPage::addWhites()
 
     whiteBox->setFont(whiteFont);
     whiteBox->insertItem(0, "");
-    whiteBox->addItem("Chardonay");
+    whiteBox->addItem("Chardonnay");
     whiteBox->addItem("Riesling");
-    return whiteBox;
+    whiteBox->addItem("Sauvignon Blanc");
+    whiteBox->addItem("Pinot Blanc");
+    whiteBox->addItem("Verdelho");
+    whiteBox->addItem("Semillon");
+    whiteBox->addItem("Pinot Gris/Pinot Grigio");
+    whiteBox->addItem("Viognier");
+    whiteBox->addItem("Gewurztraminer");
+    whiteBox->addItem("Marsanne");
+
 
 }
 
-QComboBox *AddPage::addReds()
+void AddPage::addReds()
 {
     redBox = new QComboBox;
     redBox->setMaximumHeight(30);
@@ -111,10 +123,19 @@ QComboBox *AddPage::addReds()
     redBox->addItem("Shiraz");
     redBox->addItem("Merlot");
     redBox->addItem("Pinot Noir");
-    return redBox;
+    redBox->addItem("Cabernet Sauvignon");
+    redBox->addItem("Grenache");
+    redBox->addItem("Tempranillo");
+    redBox->addItem("Nebbiolo");
+    redBox->addItem("Barbera");
+    redBox->addItem("Sangiovese");
+    redBox->addItem("Malbec");
+    redBox->addItem("Syrah");
+    redBox->addItem("Pertit Verdot");
+
 }
 
-QComboBox *AddPage::addRoses()
+void AddPage::addRoses()
 {
     roseBox = new QComboBox;
     roseBox->setMaximumHeight(30);
@@ -126,7 +147,44 @@ QComboBox *AddPage::addRoses()
     roseBox->insertItem(0, "");
     roseBox->addItem("Grenache");
     roseBox->addItem("Tempranillo");
-    return roseBox;
+    roseBox->addItem("Pinot Noir");
+
+}
+
+void AddPage::addDessert()
+{
+    dessertBox = new QComboBox;
+    dessertBox->setMaximumHeight(30);
+
+    QFont dessertFont;
+    dessertFont.setPixelSize(20);
+
+    dessertBox->setFont(dessertFont);
+    dessertBox->insertItem(0, "");
+    dessertBox->addItem("Sherry");
+    dessertBox->addItem("Muscat");
+    dessertBox->addItem("Tokay");
+    dessertBox->addItem("Port");
+
+
+}
+
+void AddPage::addSparkling()
+{
+    sparklingBox = new QComboBox;
+    sparklingBox->setMaximumHeight(30);
+
+    QFont sparklingFont;
+    sparklingFont.setPixelSize(20);
+
+    sparklingBox->setFont(sparklingFont);
+    sparklingBox->insertItem(0, "");
+    sparklingBox->addItem("Champagne");
+    sparklingBox->addItem("Sparkling White");
+    sparklingBox->addItem("Sparkling Red");
+    sparklingBox->addItem("Sparkling Rose");
+
+
 }
 
 QGroupBox *AddPage::addWineParameters()
@@ -218,12 +276,22 @@ QGroupBox *AddPage::setUpColours()
     rose->setFont(radioFont);
     connect(rose, SIGNAL(clicked(bool)), this, SLOT(setWineListRose()));
 
-    white->setChecked(true);
+    sparkling = new QRadioButton(tr("Sparkling"));
+    sparkling->setFont(radioFont);
+    connect(sparkling, SIGNAL(clicked(bool)), this, SLOT(setWineListSparkling()));
+
+    dessert = new QRadioButton(tr("Fortified/Dessert"));
+    dessert->setFont(radioFont);
+    connect(dessert, SIGNAL(clicked(bool)), this, SLOT(setWineListDessert()));
+
+    red->setChecked(true);
 
     QVBoxLayout *radioLayout = new QVBoxLayout;
     radioLayout->addWidget(white, 1, Qt::AlignHCenter);
     radioLayout->addWidget(red, 1, Qt::AlignHCenter);
     radioLayout->addWidget(rose, 1, Qt::AlignHCenter);
+    radioLayout->addWidget(sparkling, 1, Qt::AlignHCenter);
+    radioLayout->addWidget(dessert, 1, Qt::AlignHCenter);
 
 
     colours->setLayout(radioLayout);
@@ -254,6 +322,16 @@ void AddPage::setWineListWhite()
 void AddPage::setWineListRose()
 {
     emit AddPage::setWineList(2);
+}
+
+void AddPage::setWineListSparkling()
+{
+    emit AddPage::setWineList(3);
+}
+
+void AddPage::setWineListDessert()
+{
+    emit AddPage::setWineList(4);
 }
 
 void AddPage::changeWineList(int wineList)
