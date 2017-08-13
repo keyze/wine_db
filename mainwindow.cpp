@@ -33,13 +33,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_value = 0;
 
+    sp = new SearchPage(db);
+
     QWidget *fakePage = new QWidget;
     pagesWidget = new QStackedWidget;
     //something is buggering up the indexing so throwing in a fakepage at index 0 and adding the real one at index 1
     pagesWidget->addWidget(fakePage);
     pagesWidget->addWidget(new Homepage(pagesWidget));
     pagesWidget->addWidget(new AddPage(db));
-    pagesWidget->addWidget(new SearchPage(db));
+    pagesWidget->addWidget(sp);
     pagesWidget->addWidget(new Drink(db));
 
 
@@ -135,6 +137,9 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
 void MainWindow::changePage(int current)
 {
     if (current != m_value) {
+        if (current == 3) {
+            sp->repopulateSearch();
+        }
         pagesWidget->setCurrentIndex(current);
     }
 

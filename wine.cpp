@@ -136,5 +136,5 @@ int Wine::getQuantity()
 
 QString Wine::toString()
 {
-    return "";
+    return "Colour: " + getColour() + " Location: " + getLocation() + " Vineyard: " + getVineyard() + " Vinetage: " + QString::number(getVintage()) + " Name: " + getName() + " Variety: " + getVariety() + " Quantity: " + QString::number(getQuantity());
 }

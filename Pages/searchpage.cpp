@@ -18,7 +18,7 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
 
     model = initialiseModel();
 
-    QuickSearch *qsearch = new QuickSearch(dbManager);
+    qsearch = new QuickSearch(dbManager);
     searchTab->addTab(qsearch, tr("Quick Search"));
     QTableView *view = new QTableView;
     view->setModel(model);
@@ -79,6 +79,11 @@ void SearchPage::searchDatabase(QString query)
     model->setHeaderData(6, Qt::Horizontal, QObject::tr("Quantity"));
 
 
+}
+
+void SearchPage::repopulateSearch()
+{
+    qsearch->populateSearch();
 }
 
 void SearchPage::quickSearchColour(QString colour)

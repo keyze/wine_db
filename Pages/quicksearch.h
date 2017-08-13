@@ -14,6 +14,7 @@ public:
     QuickSearch(DbManager *dbmanager, QWidget* parent=0);
     ~QuickSearch();
 
+    void populateSearch();
 signals:
     void sigSearchColour(QString);
     void sigSearchCellar(QString);

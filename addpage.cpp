@@ -46,6 +46,8 @@ AddPage::AddPage(DbManager* db, QWidget *parent) :
     variety->addWidget(sparklingBox);
     variety->addWidget(dessertBox);
 
+    variety->setCurrentIndex(1);
+
     QVBoxLayout *varietyLayout = new QVBoxLayout;
     varietyLayout->addWidget(variety);
     varietyLayout->addStretch();
@@ -131,7 +133,7 @@ void AddPage::addReds()
     redBox->addItem("Sangiovese");
     redBox->addItem("Malbec");
     redBox->addItem("Syrah");
-    redBox->addItem("Pertit Verdot");
+    redBox->addItem("Petit Verdot");
 
 }
 
@@ -302,8 +304,9 @@ QGroupBox *AddPage::setUpColours()
 
 bool AddPage::isMinimum(Wine* theWine)
 {
+    qDebug() << theWine->toString();
     if (theWine->getColour() != "" && theWine->getName() != "" && theWine->getVariety() != "" &&
-            QString::number(theWine->getVintage()) != "" && theWine->getQuantity() > 0) {
+            QString::number(theWine->getVintage()) != "" && theWine->getLocation() != "" && theWine->getQuantity() > 0) {
         return true;
     }
     return false;
@@ -354,11 +357,23 @@ Wine* AddPage::createWine()
 
         QString variety = whiteBox->currentText();
         myWine->setVariety(variety);
-    } else {
+    } else if (rose->isChecked()){
         QString colour = "Rose";
         myWine->setColour(colour);
 
         QString variety = roseBox->currentText();
+        myWine->setVariety(variety);
+    } else if (sparkling->isChecked()) {
+        QString colour = "Sparkling";
+        myWine->setColour(colour);
+
+        QString variety = sparklingBox->currentText();
+        myWine->setVariety(variety);
+    } else if (dessert->isChecked()) {
+        QString colour = "Fortified/Dessert";
+        myWine->setColour(colour);
+
+        QString variety = dessertBox->currentText();
         myWine->setVariety(variety);
     }
 
@@ -373,6 +388,7 @@ Wine* AddPage::createWine()
     myWine->setVineyard(vineyard);
 
     QString location = locationEdit->currentText();
+    qDebug() << location;
     myWine->setLocation(location);
 
     int vintage = vintageEdit->text().toInt();

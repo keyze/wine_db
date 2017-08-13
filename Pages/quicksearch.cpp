@@ -90,6 +90,19 @@ void QuickSearch::populateName()
     }
 }
 
+void QuickSearch::populateSearch()
+{
+    searchName->clear();
+    searchVariety->clear();
+    searchColour->clear();
+    searchCellar->clear();
+
+    populateCellar();
+    populateColour();
+    populateName();
+    populateVariety();
+}
+
 QuickSearch::~QuickSearch()
 {
     this->close();

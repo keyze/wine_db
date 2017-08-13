@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QContextMenuEvent>
 #include <QStackedWidget>
+#include "Pages/searchpage.h"
 
 namespace Ui {
 class MainWindow;
@@ -39,7 +40,7 @@ signals:
 
 private:
     Ui::MainWindow *ui;
-
+    SearchPage* sp;
     void createActions();
     void createMenus();
     void createToolBar();
