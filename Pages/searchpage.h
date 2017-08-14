@@ -3,6 +3,7 @@
 
 #include "database/dbmanager.h"
 #include "quicksearch.h"
+#include "advancedsearch.h"
 #include <QObject>
 #include <QWidget>
 #include <QSqlQueryModel>
@@ -30,6 +31,7 @@ private:
     QTableView *createView(const QString &title, QSqlQueryModel *sqlModel);
 
     QuickSearch* qsearch;
+    AdvancedSearch* asearch;
     QSqlQueryModel* model;
 
 };

@@ -13,13 +13,16 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
     QWidget(parent)
 {
     QVBoxLayout *searchLayout = new QVBoxLayout;
-    QPushButton *searchButton = new QPushButton("Search");
     QTabWidget *searchTab = new QTabWidget;
 
     model = initialiseModel();
 
     qsearch = new QuickSearch(dbManager);
+    asearch = new AdvancedSearch(dbManager);
+
     searchTab->addTab(qsearch, tr("Quick Search"));
+    searchTab->addTab(asearch, tr("Advanced Search"));
+
     QTableView *view = new QTableView;
     view->setModel(model);
 
@@ -28,7 +31,6 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
 
 
     searchLayout->addWidget(searchTab);
-    searchLayout->addWidget(searchButton);
     searchLayout->addWidget(view);
     view->show();
     this->setLayout(searchLayout);
@@ -52,8 +54,6 @@ QSqlQueryModel* SearchPage::initialiseModel()
     sqlModel->setHeaderData(5, Qt::Horizontal, QObject::tr("Vintage"));
     sqlModel->setHeaderData(6, Qt::Horizontal, QObject::tr("Quantity"));
 
-
-   // sqlModel->select();
     return sqlModel;
 }
 
@@ -61,7 +61,6 @@ QTableView* SearchPage::createView(const QString &title, QSqlQueryModel *sqlMode
 {
     QTableView *view = new QTableView;
     view->setModel(sqlModel);
-    //view->setItemDelegate(new QSqlRelationalDelegate(view));
     view->setWindowTitle(title);
     return view;
 }
@@ -95,7 +94,13 @@ void SearchPage::quickSearchColour(QString colour)
 
 void SearchPage::quickSearchCellar(QString cellar)
 {
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where location='" + cellar + "'";
+    QString query = "";
+    if (cellar == "Home Cellar") {
+        query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where location LIKE '" + cellar + "%'";
+    } else {
+        query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where location='" + cellar + "'";
+
+    }
     searchDatabase(query);
 }
 

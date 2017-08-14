@@ -55,6 +55,7 @@ void QuickSearch::populateCellar()
     foreach(QString s, cellarWines) {
         searchCellar->addItem(s);
     }
+    searchCellar->insertItem(0, "Home Cellar");
 }
 
 void QuickSearch::populateColour()
