@@ -19,6 +19,8 @@ public:
     void searchName(QString name);
     void searchVariety(QString variety);
     void searchQuery(QMap<QString, QString> wineAttributes);
+    void search(QString query);
+
 
     void clearTable();
 private:

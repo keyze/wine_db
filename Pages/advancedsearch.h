@@ -20,6 +20,8 @@ signals:
 
 private slots:
     void searchBtnPress();
+    void repopulate();
+
 private:
     DbManager* db;
 
@@ -33,11 +35,14 @@ private:
     void initialiseParams(QGridLayout* mainLayout);
     void populateCellar();
     void populateColour();
-    void populateVariety();
-    void populateName();
-    void populateVintage();
-    void populateVineyard();
+    void populateVariety(QString where);
+    void populateName(QString where);
+    void populateVintage(QString where);
+    void populateVineyard(QString where);
 
+
+    QString constructQuery();
+    bool isEmpty();
 
 };
 

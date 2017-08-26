@@ -24,6 +24,7 @@ private slots:
     void quickSearchCellar(QString cellar);
     void quickSearchVariety(QString variety);
     void quickSearchName(QString name);
+    void advancedSearchQuery(QString query);
 
 
 private:

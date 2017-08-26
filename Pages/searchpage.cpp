@@ -40,6 +40,7 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
     connect(qsearch, SIGNAL(sigSearchColour(QString)), this, SLOT(quickSearchColour(QString)));
     connect(qsearch, SIGNAL(sigSearchName(QString)), this, SLOT(quickSearchName(QString)));
     connect(qsearch, SIGNAL(sigSearchVariety(QString)), this, SLOT(quickSearchVariety(QString)));
+    connect(asearch, SIGNAL(sigSearch(QString)), this, SLOT(advancedSearchQuery(QString)));
 }
 
 QSqlQueryModel* SearchPage::initialiseModel()
@@ -52,7 +53,8 @@ QSqlQueryModel* SearchPage::initialiseModel()
     sqlModel->setHeaderData(3, Qt::Horizontal, QObject::tr("Region"));
     sqlModel->setHeaderData(4, Qt::Horizontal, QObject::tr("Vineyard"));
     sqlModel->setHeaderData(5, Qt::Horizontal, QObject::tr("Vintage"));
-    sqlModel->setHeaderData(6, Qt::Horizontal, QObject::tr("Quantity"));
+    sqlModel->setHeaderData(6, Qt::Horizontal, QObject::tr("Cellar"));
+    sqlModel->setHeaderData(7, Qt::Horizontal, QObject::tr("Quantity"));
 
     return sqlModel;
 }
@@ -75,7 +77,8 @@ void SearchPage::searchDatabase(QString query)
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Variety"));
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Colour"));
     model->setHeaderData(5, Qt::Horizontal, QObject::tr("Region"));
-    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Quantity"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Cellar"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Quantity"));
 
 
 }
@@ -83,11 +86,12 @@ void SearchPage::searchDatabase(QString query)
 void SearchPage::repopulateSearch()
 {
     qsearch->populateSearch();
+    asearch->populateSearch();
 }
 
 void SearchPage::quickSearchColour(QString colour)
 {
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where colour='" + colour + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, location, quantity FROM wines where colour='" + colour + "'";
     searchDatabase(query);
 
 }
@@ -96,9 +100,9 @@ void SearchPage::quickSearchCellar(QString cellar)
 {
     QString query = "";
     if (cellar == "Home Cellar") {
-        query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where location LIKE '" + cellar + "%'";
+        query = "SELECT vineyard, name, vintage, variety, colour, region, location, quantity FROM wines where location LIKE '" + cellar + "%'";
     } else {
-        query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where location='" + cellar + "'";
+        query = "SELECT vineyard, name, vintage, variety, colour, region, location, quantity FROM wines where location='" + cellar + "'";
 
     }
     searchDatabase(query);
@@ -106,13 +110,18 @@ void SearchPage::quickSearchCellar(QString cellar)
 
 void SearchPage::quickSearchVariety(QString variety)
 {
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where variety='" + variety + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, location, quantity FROM wines where variety='" + variety + "'";
     searchDatabase(query);
 }
 
 void SearchPage::quickSearchName(QString name)
 {
-    QString query = "SELECT vineyard, name, vintage, variety, colour, region, quantity FROM wines where name='" + name + "'";
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, location, quantity FROM wines where name='" + name + "'";
+    searchDatabase(query);
+}
+
+void SearchPage::advancedSearchQuery(QString query)
+{
     searchDatabase(query);
 }
 

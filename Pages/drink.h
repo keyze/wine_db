@@ -9,6 +9,7 @@
 #include "database/dbmanager.h"
 #include "database/winetable.h"
 #include "winebox.h"
+#include "advancedsearch.h"
 #include <QMap>
 
 class Drink : public QWidget
@@ -21,6 +22,7 @@ signals:
 
 private slots:
     void findWine();
+    void searchWine(QString query);
     void drinkWine();
     void onRowChanged(QModelIndex index);
 
@@ -37,6 +39,8 @@ private:
     QLineEdit* varietyEdit;
     QLineEdit* vineyardEdit;
     QLineEdit* quantityEdit;
+
+    AdvancedSearch *asearch;
 
     QMap<QString, QString> drinkMap;
     int currentRow;

@@ -1,6 +1,9 @@
 #include "advancedsearch.h"
+#include <QGroupBox>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QLabel>
+#include <QDebug>
 
 AdvancedSearch::AdvancedSearch(DbManager *dbmanager, QWidget *parent) :
     QWidget(parent)
@@ -26,7 +29,14 @@ void AdvancedSearch::initialiseParams(QGridLayout *mainLayout)
     varietyBox = new QComboBox;
     vineyardBox = new QComboBox;
 
+    connect(cellarBox, SIGNAL(currentTextChanged(QString)), this, SLOT(repopulate()));
+    connect(colourBox, SIGNAL(currentTextChanged(QString)), this, SLOT(repopulate()));
+
+    QGroupBox* theBox = new QGroupBox;
+    theBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    QVBoxLayout* layout = new QVBoxLayout;
     QPushButton* searchBtn = new QPushButton(tr("Search"));
+
     connect(searchBtn, SIGNAL(clicked(bool)), this, SLOT(searchBtnPress()));
 
     QLabel *cellarlbl = new QLabel(tr("Cellar"));
@@ -36,8 +46,8 @@ void AdvancedSearch::initialiseParams(QGridLayout *mainLayout)
     QLabel *varietylbl = new QLabel(tr("Variety"));
     QLabel *vineyardlbl = new QLabel(tr("Vineyard"));
 
-    mainLayout->addWidget(cellarlbl, 0, 0);
-    mainLayout->addWidget(cellarBox, 0, 1);
+    mainLayout->addWidget(cellarlbl, 0, 0, 1, 1, Qt::AlignHCenter);
+    mainLayout->addWidget(cellarBox, 0, 1, 1, 1, Qt::AlignHCenter);
 
     mainLayout->addWidget(colourlbl, 0, 2);
     mainLayout->addWidget(colourBox, 0, 3);
@@ -56,30 +66,45 @@ void AdvancedSearch::initialiseParams(QGridLayout *mainLayout)
 
     mainLayout->addWidget(searchBtn, 3, 0, 1, 4);
 
-    setLayout(mainLayout);
+    theBox->setLayout(mainLayout);
+    layout->addWidget(theBox, 1, Qt::AlignHCenter);
+    setLayout(layout);
 }
 
 void AdvancedSearch::searchBtnPress()
 {
-    QString query = "";
-    emit sigSearch(query);
+    if (!isEmpty()) {
+        emit sigSearch(constructQuery());
+    }
+}
+
+void AdvancedSearch::repopulate()
+{
+    QString where = "";
+    if (cellarBox->currentText() != "") {
+        where = "Where location='" + cellarBox->currentText() + "' ";
+        if (colourBox->currentText() != "") {
+            where = where + "AND colour='" + colourBox->currentText() + "'";
+        }
+    } else if (colourBox->currentText() != "") {
+        where = "Where colour='" + colourBox->currentText() + "'";
+    }
+
+    populateName(where);
+    populateVineyard(where);
+    populateVariety(where);
+    populateVintage(where);
 }
 
 void AdvancedSearch::populateSearch()
 {
-    cellarBox->clear();
-    colourBox->clear();
-    nameBox->clear();
-    vineyardBox->clear();
-    varietyBox->clear();
-    vintageBox->clear();
-
+    QString where = "";
     populateCellar();
     populateColour();
-    populateName();
-    populateVineyard();
-    populateVariety();
-    populateVintage();
+    populateName(where);
+    populateVineyard(where);
+    populateVariety(where);
+    populateVintage(where);
 }
 
 void AdvancedSearch::populateCellar()
@@ -88,9 +113,12 @@ void AdvancedSearch::populateCellar()
     QStringList cellarWines = db->searchQuery(search);
     cellarWines.removeDuplicates();
 
+    cellarBox->clear();
+    cellarBox->insertItem(0, "");
     foreach(QString s, cellarWines) {
         cellarBox->addItem(s);
     }
+
 
 }
 
@@ -100,49 +128,100 @@ void AdvancedSearch::populateColour()
     QStringList colourWines = db->searchQuery(search);
     colourWines.removeDuplicates();
 
+    colourBox->clear();
+    colourBox->insertItem(0, "");
     foreach(QString s, colourWines) {
         colourBox->addItem(s);
     }
+
 }
 
-void AdvancedSearch::populateName()
+void AdvancedSearch::populateName(QString where)
 {
-    QString search = "SELECT name FROM wines";
+    QString search = "SELECT name FROM wines " + where;
     QStringList nameWines = db->searchQuery(search);
     nameWines.removeDuplicates();
 
+    nameBox->clear();
+    nameBox->insertItem(0, "");
     foreach(QString s, nameWines) {
         nameBox->addItem(s);
     }
+
 }
 
-void AdvancedSearch::populateVineyard()
+void AdvancedSearch::populateVineyard(QString where)
 {
-    QString search = "Select vineyard From wines";
+    QString search = "Select vineyard From wines " + where;
     QStringList vineyardWines = db->searchQuery(search);
     vineyardWines.removeDuplicates();
+
+    vineyardBox->clear();
+    vineyardBox->insertItem(0, "");
     foreach(QString s, vineyardWines) {
         vineyardBox->addItem(s);
     }
+
 }
 
-void AdvancedSearch::populateVariety()
+void AdvancedSearch::populateVariety(QString where)
 {
-    QString search = "SELECT variety FROM wines";
+    QString search = "SELECT variety FROM wines " + where;
     QStringList varietyWines = db->searchQuery(search);
     varietyWines.removeDuplicates();
 
+    varietyBox->clear();
+    varietyBox->insertItem(0, "");
     foreach(QString s, varietyWines) {
         varietyBox->addItem(s);
     }
+
 }
 
-void AdvancedSearch::populateVintage()
+void AdvancedSearch::populateVintage(QString where)
 {
-    QString search = "Select vintage from wines";
+    QString search = "Select vintage from wines " + where;
     QStringList vintageWines = db->searchQuery(search);
     vintageWines.removeDuplicates();
+
+    vintageBox->clear();
+    vintageBox->insertItem(0, "");
     foreach(QString s, vintageWines) {
         vintageBox->addItem(s);
     }
+
+}
+
+QString AdvancedSearch::constructQuery()
+{
+    QString query = "SELECT vineyard, name, vintage, variety, colour, region, location, quantity FROM wines where quantity>=0 ";
+    if (cellarBox->currentText() != "") {
+        query = query + "AND location='" + cellarBox->currentText() +"' ";
+    }
+    if (colourBox->currentText() != "") {
+        query = query + "AND colour='" + colourBox->currentText() + "' ";
+    }
+    if (nameBox->currentText() != "") {
+        query = query + "AND name='" + nameBox->currentText() + "' ";
+    }
+    if (vineyardBox->currentText() != "") {
+        query = query + "AND vineyard='" + vineyardBox->currentText() + "' ";
+    }
+    if (varietyBox->currentText() != "") {
+        query = query + "AND variety='" + varietyBox->currentText() + "' ";
+    }
+    if (vintageBox->currentText() != "") {
+        query = query + "And vintage='" + vintageBox->currentText() + "' ";
+    }
+    qDebug() << "Advanced Query" << query;
+    return query;
+}
+
+bool AdvancedSearch::isEmpty()
+{
+    if (cellarBox->currentText() == "" && colourBox->currentText() == "" && nameBox->currentText() == "" &&
+            vineyardBox->currentText() == "" && varietyBox->currentText() == "" && vintageBox->currentText() == "") {
+        return true;
+    }
+    return false;
 }

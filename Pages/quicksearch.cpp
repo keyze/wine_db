@@ -23,10 +23,20 @@ void QuickSearch::initialiseParams(QGridLayout *mainLayout)
     searchVariety = new QComboBox;
     searchName = new QComboBox;
 
+    QFont paramFont;
+    paramFont.setPixelSize(20);
+    paramFont.setBold(true);
+    paramFont.setItalic(true);
+
     QPushButton *cellarbtn = new QPushButton(tr("Search Cellar"));
     QPushButton *colourbtn = new QPushButton(tr("Search Colour"));
     QPushButton *varietybtn = new QPushButton(tr("Search Variety"));
     QPushButton *namebtn = new QPushButton(tr("Search Name"));
+
+    cellarbtn->setFont(paramFont);
+    colourbtn->setFont(paramFont);
+    varietybtn->setFont(paramFont);
+    namebtn->setFont(paramFont);
 
     connect(cellarbtn, SIGNAL(clicked(bool)), this, SLOT(cellarBtnPress()));
     connect(colourbtn, SIGNAL(clicked(bool)), this, SLOT(colourBtnPress()));
