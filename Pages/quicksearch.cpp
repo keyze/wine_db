@@ -18,10 +18,18 @@ QuickSearch::QuickSearch(DbManager *dbmanager, QWidget *parent) :
 
 void QuickSearch::initialiseParams(QGridLayout *mainLayout)
 {
+    QFont boxFont;
+    boxFont.setPixelSize(20);
+
     searchCellar = new QComboBox;
     searchColour = new QComboBox;
     searchVariety = new QComboBox;
     searchName = new QComboBox;
+
+    searchCellar->setFont(boxFont);
+    searchColour->setFont(boxFont);
+    searchVariety->setFont(boxFont);
+    searchName->setFont(boxFont);
 
     QFont paramFont;
     paramFont.setPixelSize(20);

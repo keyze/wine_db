@@ -21,7 +21,7 @@ public:
 signals:
 
 private slots:
-    void findWine();
+
     void searchWine(QString query);
     void drinkWine();
     void onRowChanged(QModelIndex index);
@@ -32,12 +32,7 @@ public slots:
 private:
     WineBox* theBox;
 
-    QLineEdit* colourEdit;
-    QLineEdit* cellarEdit;
-    QLineEdit* nameEdit;
-    QLineEdit* vintageEdit;
-    QLineEdit* varietyEdit;
-    QLineEdit* vineyardEdit;
+
     QLineEdit* quantityEdit;
 
     AdvancedSearch *asearch;

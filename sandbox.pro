@@ -27,9 +27,7 @@ SOURCES += \
         mainwindow.cpp \
     pages.cpp \
     homepage.cpp \
-    borderlayout.cpp \
     addpage.cpp \
-    stuff.cpp \
     database/dbmanager.cpp \
     wine.cpp \
     Pages/searchpage.cpp \
@@ -43,9 +41,7 @@ HEADERS += \
         mainwindow.h \
     pages.h \
     homepage.h \
-    borderlayout.h \
     addpage.h \
-    stuff.h \
     database/dbmanager.h \
     wine.h \
     Pages/searchpage.h \

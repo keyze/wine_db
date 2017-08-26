@@ -13,7 +13,13 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
     QWidget(parent)
 {
     QVBoxLayout *searchLayout = new QVBoxLayout;
+
+    QFont tabFont;
+    tabFont.setPixelSize(20);
+    tabFont.setBold(true);
+
     QTabWidget *searchTab = new QTabWidget;
+    searchTab->setFont(tabFont);
 
     model = initialiseModel();
 
@@ -23,9 +29,12 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
     searchTab->addTab(qsearch, tr("Quick Search"));
     searchTab->addTab(asearch, tr("Advanced Search"));
 
+    QFont viewFont;
+    viewFont.setPixelSize(20);
+
     QTableView *view = new QTableView;
     view->setModel(model);
-
+    view->setFont(viewFont);
 
     view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 

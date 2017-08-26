@@ -22,6 +22,8 @@ AdvancedSearch::~AdvancedSearch()
 
 void AdvancedSearch::initialiseParams(QGridLayout *mainLayout)
 {
+    QFont boxFont;
+    boxFont.setPixelSize(20);
     cellarBox = new QComboBox;
     colourBox = new QComboBox;
     nameBox = new QComboBox;
@@ -29,22 +31,41 @@ void AdvancedSearch::initialiseParams(QGridLayout *mainLayout)
     varietyBox = new QComboBox;
     vineyardBox = new QComboBox;
 
+    cellarBox->setFont(boxFont);
+    colourBox->setFont(boxFont);
+    nameBox->setFont(boxFont);
+    vintageBox->setFont(boxFont);
+    varietyBox->setFont(boxFont);
+    vineyardBox->setFont(boxFont);
+
     connect(cellarBox, SIGNAL(currentTextChanged(QString)), this, SLOT(repopulate()));
     connect(colourBox, SIGNAL(currentTextChanged(QString)), this, SLOT(repopulate()));
 
     QGroupBox* theBox = new QGroupBox;
     theBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+    QFont lblFont;
+    lblFont.setPixelSize(20);
+    lblFont.setBold(true);
+
     QVBoxLayout* layout = new QVBoxLayout;
     QPushButton* searchBtn = new QPushButton(tr("Search"));
-
+    searchBtn->setFont(lblFont);
     connect(searchBtn, SIGNAL(clicked(bool)), this, SLOT(searchBtnPress()));
 
-    QLabel *cellarlbl = new QLabel(tr("Cellar"));
-    QLabel *colourlbl = new QLabel(tr("Colour"));
-    QLabel *namelbl = new QLabel(tr("Name"));
-    QLabel *vintagelbl = new QLabel(tr("Vintage"));
-    QLabel *varietylbl = new QLabel(tr("Variety"));
-    QLabel *vineyardlbl = new QLabel(tr("Vineyard"));
+    QLabel *cellarlbl = new QLabel(tr("Cellar:"));
+    QLabel *colourlbl = new QLabel(tr("Colour:"));
+    QLabel *namelbl = new QLabel(tr("Name:"));
+    QLabel *vintagelbl = new QLabel(tr("Vintage:"));
+    QLabel *varietylbl = new QLabel(tr("Variety:"));
+    QLabel *vineyardlbl = new QLabel(tr("Vineyard:"));
+
+    cellarlbl->setFont(lblFont);
+    colourlbl->setFont(lblFont);
+    namelbl->setFont(lblFont);
+    vintagelbl->setFont(lblFont);
+    varietylbl->setFont(lblFont);
+    vineyardlbl->setFont(lblFont);
 
     mainLayout->addWidget(cellarlbl, 0, 0, 1, 1, Qt::AlignHCenter);
     mainLayout->addWidget(cellarBox, 0, 1, 1, 1, Qt::AlignHCenter);

@@ -9,9 +9,17 @@
 
 Drink::Drink(DbManager *db, QWidget *parent) : QWidget(parent),  currentRow(0), theDb(db)
 {
-    QPushButton *find = new QPushButton(tr("find"));
+    QFont drinkFont;
+    drinkFont.setPixelSize(20);
+    drinkFont.setBold(true);
+
+    QFont viewFont;
+    viewFont.setPixelSize(20);
+
     QPushButton *drink = new QPushButton(tr("Drink"));
     drink->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    drink->setMaximumHeight(50);
+    drink->setFont(drinkFont);
     QTableView *view = new QTableView;
 
     asearch = new AdvancedSearch(theDb);
@@ -21,17 +29,18 @@ Drink::Drink(DbManager *db, QWidget *parent) : QWidget(parent),  currentRow(0), 
     wineTable = new WineTable;
     view->setModel(wineTable);
     view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    view->setFont(viewFont);
 
     view->show();
 
     QGridLayout* layout = setupSearch();
-  //  layout->addWidget(find, 4, 0, 1, 4);
+
     layout->addWidget(view, 1, 0, 1, 4);
     layout->addWidget(drink, 2, 2, 1, 2);
     this->setLayout(layout);
 
     connect(asearch, SIGNAL(sigSearch(QString)), this, SLOT(searchWine(QString)));
-    connect(find, SIGNAL(clicked(bool)), this, SLOT(findWine()));
+
     connect(drink, SIGNAL(clicked(bool)), this, SLOT(drinkWine()));
     connect(view->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), this, SLOT(onRowChanged(QModelIndex)));
 }
@@ -39,39 +48,23 @@ Drink::Drink(DbManager *db, QWidget *parent) : QWidget(parent),  currentRow(0), 
 QGridLayout* Drink::setupSearch()
 {
     QGridLayout *layout = new QGridLayout;
-//    QLabel*colourlbl = new QLabel(tr("Colour"));
-//    QLabel *cellarlbl = new QLabel(tr("Cellar"));
-//    QLabel *namelbl = new QLabel(tr("Name"));
-//    QLabel *vintagelbl = new QLabel(tr("Vintage"));
-//    QLabel *varietylbl = new QLabel(tr("Variety"));
-//    QLabel *vineyardlbl = new QLabel(tr("Vineyard"));
+    QFont lblFont;
+    lblFont.setBold(true);
+    lblFont.setPixelSize(20);
+
+    QFont editFont;
+    editFont.setPixelSize(20);
+
     QLabel *quantitylbl = new QLabel(tr("Enter Quantity:"));
     quantitylbl->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-    colourEdit = new QLineEdit;
-    nameEdit = new QLineEdit;
-    vintageEdit = new QLineEdit;
-    varietyEdit = new QLineEdit;
-    vineyardEdit = new QLineEdit;
-    cellarEdit = new QLineEdit;
+    quantitylbl->setFont(lblFont);
+
     quantityEdit = new QLineEdit;
     quantityEdit->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-//    layout->addWidget(cellarlbl, 0, 0);
-//    layout->addWidget(cellarEdit, 0, 1);
+    quantityEdit->setFont(editFont);
+    quantityEdit->setMaximumHeight(50);
 
-//    layout->addWidget(namelbl, 0, 2);
-//    layout->addWidget(nameEdit, 0, 3);
 
-//    layout->addWidget(varietylbl, 1, 0);
-//    layout->addWidget(varietyEdit, 1, 1);
-
-//    layout->addWidget(vineyardlbl, 1, 2);
-//    layout->addWidget(vineyardEdit, 1, 3);
-
-//    layout->addWidget(colourlbl, 2, 0);
-//    layout->addWidget(colourEdit, 2, 1);
-
-//    layout->addWidget(vintagelbl, 2, 2);
-//    layout->addWidget(vintageEdit, 2, 3);
 
     layout->addWidget(asearch, 0, 0, 1, 4);
     layout->addWidget(quantitylbl, 2, 0, 1, 1, Qt::AlignRight);
@@ -81,19 +74,6 @@ QGridLayout* Drink::setupSearch()
 
 }
 
-void Drink::findWine()
-{
-    QMap<QString, QString> wineMap;
-    wineMap.insert("colour", colourEdit->text());
-    wineMap.insert("location", cellarEdit->text());
-    wineMap.insert("name", nameEdit->text());
-    wineMap.insert("vintage", vintageEdit->text());
-    wineMap.insert("variety", varietyEdit->text());
-    wineMap.insert("vineyard", vineyardEdit->text());
-
-
-    wineTable->searchQuery(wineMap);
-}
 
 void Drink::searchWine(QString query)
 {
@@ -142,13 +122,7 @@ void Drink::onRowChanged(QModelIndex index)
 
 
 
-  //  QMap map;
 
 }
 
-//this->setHeaderData(0, Qt::Horizontal, QObject::tr("Colour"));
-//this->setHeaderData(1, Qt::Horizontal, QObject::tr("Variety"));
-//this->setHeaderData(2, Qt::Horizontal, QObject::tr("Name"));
-//this->setHeaderData(3, Qt::Horizontal, QObject::tr("Region"));
-//this->setHeaderData(4, Qt::Horizontal, QObject::tr("Vineyard"));
-//this->setHeaderData(5, Qt::Horizontal, QObject::tr("Vintage"));
+
