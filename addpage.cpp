@@ -101,11 +101,13 @@ void AddPage::addWhites()
     whiteBox->addItem("Chardonnay");
     whiteBox->addItem("Riesling");
     whiteBox->addItem("Sauvignon Blanc");
+    whiteBox->addItem("Sauvignon Blanc Semillon");
     whiteBox->addItem("Pinot Blanc");
     whiteBox->addItem("Verdelho");
     whiteBox->addItem("Semillon");
     whiteBox->addItem("Pinot Gris/Pinot Grigio");
     whiteBox->addItem("Viognier");
+    whiteBox->addItem("Viognier Nouveau");
     whiteBox->addItem("Gewurztraminer");
     whiteBox->addItem("Marsanne");
 
@@ -122,10 +124,15 @@ void AddPage::addReds()
 
     redBox->setFont(redFont);
     redBox->insertItem(0, "");
+    redBox->addItem("Bordeaux");
+    redBox->addItem("Cabernet Franc");
     redBox->addItem("Shiraz");
+    redBox->addItem("Shiraz Viognier");
     redBox->addItem("Merlot");
     redBox->addItem("Pinot Noir");
+    redBox->addItem("Ballinderry");
     redBox->addItem("Cabernet Sauvignon");
+    redBox->addItem("Ceoltoiri");
     redBox->addItem("Grenache");
     redBox->addItem("Tempranillo");
     redBox->addItem("Nebbiolo");
