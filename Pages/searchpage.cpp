@@ -52,6 +52,8 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
     connect(asearch, SIGNAL(sigSearch(QString)), this, SLOT(advancedSearchQuery(QString)));
 }
 
+
+
 QSqlQueryModel* SearchPage::initialiseModel()
 {
     QSqlQueryModel* sqlModel = new QSqlQueryModel;
@@ -79,7 +81,7 @@ QTableView* SearchPage::createView(const QString &title, QSqlQueryModel *sqlMode
 void SearchPage::searchDatabase(QString query)
 {
     qDebug() << query;
-    model->setQuery(query);
+    model->setQuery(query + " ORDER BY variety");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Vineyard"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Name"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Vintage"));
@@ -132,6 +134,13 @@ void SearchPage::quickSearchName(QString name)
 void SearchPage::advancedSearchQuery(QString query)
 {
     searchDatabase(query);
+}
+
+void SearchPage::clearPage()
+{
+    model->clear();
+    qsearch->clearPage();
+    asearch->clearPage();
 }
 
 SearchPage::~SearchPage()

@@ -28,6 +28,13 @@ QMap<QString, QString> Wine::wineMap()
         theMap.insert("name", name);
     }
 
+    if (location != "") {
+        theMap.insert("location", location);
+    }
+
+    if (region != "") {
+        theMap.insert("region", region);
+    }
     theMap.insert("vintage", QString::number(vintage));
 
 

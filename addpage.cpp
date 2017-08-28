@@ -99,17 +99,18 @@ void AddPage::addWhites()
     whiteBox->setFont(whiteFont);
     whiteBox->insertItem(0, "");
     whiteBox->addItem("Chardonnay");
+    whiteBox->addItem("Gewurztraminer");
+    whiteBox->addItem("Marsanne");
+    whiteBox->addItem("Pinot Blanc");
+    whiteBox->addItem("Pinot Gris/Pinot Grigio");
     whiteBox->addItem("Riesling");
     whiteBox->addItem("Sauvignon Blanc");
     whiteBox->addItem("Sauvignon Blanc Semillon");
-    whiteBox->addItem("Pinot Blanc");
-    whiteBox->addItem("Verdelho");
     whiteBox->addItem("Semillon");
-    whiteBox->addItem("Pinot Gris/Pinot Grigio");
+    whiteBox->addItem("Verdelho");
     whiteBox->addItem("Viognier");
     whiteBox->addItem("Viognier Nouveau");
-    whiteBox->addItem("Gewurztraminer");
-    whiteBox->addItem("Marsanne");
+
 
 
 }
@@ -124,23 +125,25 @@ void AddPage::addReds()
 
     redBox->setFont(redFont);
     redBox->insertItem(0, "");
+    redBox->addItem("Ballinderry");
+    redBox->addItem("Barbera");
     redBox->addItem("Bordeaux");
     redBox->addItem("Cabernet Franc");
-    redBox->addItem("Shiraz");
-    redBox->addItem("Shiraz Viognier");
-    redBox->addItem("Merlot");
-    redBox->addItem("Pinot Noir");
-    redBox->addItem("Ballinderry");
     redBox->addItem("Cabernet Sauvignon");
     redBox->addItem("Ceoltoiri");
     redBox->addItem("Grenache");
-    redBox->addItem("Tempranillo");
-    redBox->addItem("Nebbiolo");
-    redBox->addItem("Barbera");
-    redBox->addItem("Sangiovese");
     redBox->addItem("Malbec");
-    redBox->addItem("Syrah");
+    redBox->addItem("Merlot");
+    redBox->addItem("Nebbiolo");
     redBox->addItem("Petit Verdot");
+    redBox->addItem("Pinot Noir");
+    redBox->addItem("Quintet");
+    redBox->addItem("Sangiovese");
+    redBox->addItem("Shiraz");
+    redBox->addItem("Shiraz Viognier");
+    redBox->addItem("Syrah");
+    redBox->addItem("Tempranillo");  
+    redBox->addItem("Volnay");
 
 }
 
@@ -155,8 +158,10 @@ void AddPage::addRoses()
     roseBox->setFont(roseFont);
     roseBox->insertItem(0, "");
     roseBox->addItem("Grenache");
-    roseBox->addItem("Tempranillo");
     roseBox->addItem("Pinot Noir");
+    roseBox->addItem("Muscat");
+    roseBox->addItem("Tempranillo");
+
 
 }
 
@@ -170,10 +175,11 @@ void AddPage::addDessert()
 
     dessertBox->setFont(dessertFont);
     dessertBox->insertItem(0, "");
-    dessertBox->addItem("Sherry");
     dessertBox->addItem("Muscat");
-    dessertBox->addItem("Tokay");
     dessertBox->addItem("Port");
+    dessertBox->addItem("Sherry");   
+    dessertBox->addItem("Tokay");
+
 
 
 }
@@ -188,10 +194,10 @@ void AddPage::addSparkling()
 
     sparklingBox->setFont(sparklingFont);
     sparklingBox->insertItem(0, "");
-    sparklingBox->addItem("Champagne");
-    sparklingBox->addItem("Sparkling White");
+    sparklingBox->addItem("Champagne");   
     sparklingBox->addItem("Sparkling Red");
     sparklingBox->addItem("Sparkling Rose");
+    sparklingBox->addItem("Sparkling White");
 
 
 }
@@ -458,6 +464,8 @@ void AddPage::clearFields()
     redBox->setCurrentIndex(0);
     whiteBox->setCurrentIndex(0);
     roseBox->setCurrentIndex(0);
+    dessertBox->setCurrentIndex(0);
+    sparklingBox->setCurrentIndex(0);
 }
 
 QString AddPage::checkCase(QString &field)

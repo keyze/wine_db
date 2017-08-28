@@ -7,6 +7,8 @@
 #include <QContextMenuEvent>
 #include <QStackedWidget>
 #include "Pages/searchpage.h"
+#include "addpage.h"
+#include "Pages/drink.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,13 +24,11 @@ public:
 
 private slots:
     void changePage(int);
-    void newFile();
-    void open();
-    void print();
     void ribbonAdd();
     void ribbonDrink();
     void ribbonHome();
     void ribbonSearch();
+    void clearPage(QString page);
 
 protected:
 #ifndef QT_NO_CONTEXTMENU
@@ -41,6 +41,9 @@ signals:
 private:
     Ui::MainWindow *ui;
     SearchPage* sp;
+    AddPage *ap;
+    Drink *dp;
+
     void createActions();
     void createMenus();
     void createToolBar();

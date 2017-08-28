@@ -1,5 +1,4 @@
 #include "homepage.h"
-#include "borderlayout.h"
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -89,14 +88,17 @@ Homepage::Homepage(QStackedWidget *pages, QWidget *parent) :
 void Homepage::goToAddPage()
 {
     changePage->setCurrentIndex(2);
+    emit goToPage("Add");
 }
 
 void Homepage::goToSearchPage()
 {
     changePage->setCurrentIndex(3);
+    emit goToPage("Search");
 }
 
 void Homepage::goToDrinkPage()
 {
    changePage->setCurrentIndex(4);
+   emit goToPage("Drink");
 }

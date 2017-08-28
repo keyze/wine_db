@@ -121,7 +121,7 @@ bool DbManager::wineExists(Wine *wine)
 {
     QString query = "Select * from wines where name='" + wine->getName() + "' and " +
             "vintage='" + QString::number(wine->getVintage()) + "' and " + "colour='" + wine->getColour() +
-            "' and " + "variety='" + wine->getVariety() + "'";
+            "' and " + "variety='" + wine->getVariety() + "' and location='" + wine->getLocation() + "'";
 
     QStringList wines = searchQuery(query);
     if (wines.length() > 0) {

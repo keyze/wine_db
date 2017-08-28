@@ -16,6 +16,7 @@ class AddPage : public QWidget
     Q_OBJECT
 public:
     explicit AddPage(DbManager* db, QWidget *parent=0);
+    void clearFields();
     ~AddPage();
 
 private slots:
@@ -70,7 +71,7 @@ private:
     QComboBox *locationEdit;
     QLineEdit *quantityEdit;
 
-    void clearFields();
+
     QString checkCase(QString &field);
     bool isMinimum(Wine *theWine);
 };

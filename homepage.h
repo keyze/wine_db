@@ -17,6 +17,9 @@ private slots:
     void goToSearchPage();
     void goToDrinkPage();
 
+signals:
+    void goToPage(QString);
+
 private:
     QStackedWidget *changePage;
 };

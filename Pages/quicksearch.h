@@ -12,6 +12,7 @@ class QuickSearch : public QWidget
     Q_OBJECT
 public:
     QuickSearch(DbManager *dbmanager, QWidget* parent=0);
+    void clearPage();
     ~QuickSearch();
 
     void populateSearch();

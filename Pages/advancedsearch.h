@@ -12,6 +12,7 @@ class AdvancedSearch : public QWidget
     Q_OBJECT
 public:
     AdvancedSearch(DbManager* dbmanager, QWidget* parent=0);
+    void clearPage();
     ~AdvancedSearch();
 
     void populateSearch();

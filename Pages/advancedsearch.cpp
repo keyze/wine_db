@@ -14,6 +14,16 @@ AdvancedSearch::AdvancedSearch(DbManager *dbmanager, QWidget *parent) :
     populateSearch();
 }
 
+void AdvancedSearch::clearPage()
+{
+    cellarBox->setCurrentIndex(0);
+    colourBox->setCurrentIndex(0);
+    nameBox->setCurrentIndex(0);
+    varietyBox->setCurrentIndex(0);
+    vintageBox->setCurrentIndex(0);
+    vineyardBox->setCurrentIndex(0);
+}
+
 AdvancedSearch::~AdvancedSearch()
 {
     this->close();
@@ -67,28 +77,28 @@ void AdvancedSearch::initialiseParams(QGridLayout *mainLayout)
     varietylbl->setFont(lblFont);
     vineyardlbl->setFont(lblFont);
 
-    mainLayout->addWidget(cellarlbl, 0, 0, 1, 1, Qt::AlignHCenter);
-    mainLayout->addWidget(cellarBox, 0, 1, 1, 1, Qt::AlignHCenter);
+    mainLayout->addWidget(cellarlbl, 0, 0, 1, 1, Qt::AlignRight);
+    mainLayout->addWidget(cellarBox, 0, 1);
 
-    mainLayout->addWidget(colourlbl, 0, 2);
+    mainLayout->addWidget(colourlbl, 0, 2, 1, 1, Qt::AlignRight);
     mainLayout->addWidget(colourBox, 0, 3);
 
-    mainLayout->addWidget(varietylbl, 1, 0);
+    mainLayout->addWidget(varietylbl, 1, 0, 1, 1, Qt::AlignRight);
     mainLayout->addWidget(varietyBox, 1, 1);
 
-    mainLayout->addWidget(vintagelbl, 1, 2);
+    mainLayout->addWidget(vintagelbl, 1, 2, 1, 1, Qt::AlignRight);
     mainLayout->addWidget(vintageBox, 1, 3);
 
-    mainLayout->addWidget(vineyardlbl, 2, 0);
+    mainLayout->addWidget(vineyardlbl, 2, 0, 1, 1, Qt::AlignRight);
     mainLayout->addWidget(vineyardBox, 2, 1);
 
-    mainLayout->addWidget(namelbl, 2, 2);
+    mainLayout->addWidget(namelbl, 2, 2, Qt::AlignRight);
     mainLayout->addWidget(nameBox, 2, 3);
 
     mainLayout->addWidget(searchBtn, 3, 0, 1, 4);
 
     theBox->setLayout(mainLayout);
-    layout->addWidget(theBox, 1, Qt::AlignHCenter);
+    layout->addWidget(theBox);
     setLayout(layout);
 }
 

@@ -17,6 +17,7 @@ class Drink : public QWidget
     Q_OBJECT
 public:
     explicit Drink(DbManager* db, QWidget *parent = nullptr);
+    void clearPage();
 
 signals:
 

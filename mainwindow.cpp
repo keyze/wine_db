@@ -6,7 +6,6 @@
 #include "Pages/drink.h"
 #include "Pages/searchpage.h"
 #include "database/dbmanager.h"
-#include "borderlayout.h"
 #include <QVBoxLayout>
 #include <QKeySequence>
 #include <QMessageBox>
@@ -14,6 +13,7 @@
 #include <QToolBar>
 #include <QAction>
 #include <QStatusBar>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -34,15 +34,18 @@ MainWindow::MainWindow(QWidget *parent) :
     m_value = 0;
 
     sp = new SearchPage(db);
+    ap = new AddPage(db);
+    dp = new Drink(db);
 
     QWidget *fakePage = new QWidget;
     pagesWidget = new QStackedWidget;
+    Homepage *hp = new Homepage(pagesWidget);
     //something is buggering up the indexing so throwing in a fakepage at index 0 and adding the real one at index 1
     pagesWidget->addWidget(fakePage);
-    pagesWidget->addWidget(new Homepage(pagesWidget));
-    pagesWidget->addWidget(new AddPage(db));
+    pagesWidget->addWidget(hp);
+    pagesWidget->addWidget(ap);
     pagesWidget->addWidget(sp);
-    pagesWidget->addWidget(new Drink(db));
+    pagesWidget->addWidget(dp);
 
 
     pagesWidget->setCurrentIndex(1);
@@ -64,6 +67,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->showMaximized();
     setUnifiedTitleAndToolBarOnMac(true);
     this->statusBar()->setDisabled(true);
+
+    connect(hp, SIGNAL(goToPage(QString)), this, SLOT(clearPage(QString)));
 
 }
 
@@ -145,32 +150,17 @@ void MainWindow::changePage(int current)
 
 }
 
-void MainWindow::newFile()
-{
-
-    changePage(1);
-
-}
-
-
-void MainWindow::open()
-{
-    changePage(2);
-}
-
-void MainWindow::print()
-{
-    changePage(0);
-}
 
 void MainWindow::ribbonAdd()
 {
     changePage(2);
+    clearPage("Add");
 }
 
 void MainWindow::ribbonDrink()
 {
     changePage(4);
+    clearPage("Drink");
 }
 
 void MainWindow::ribbonHome()
@@ -181,6 +171,22 @@ void MainWindow::ribbonHome()
 void MainWindow::ribbonSearch()
 {
     changePage(3);
+    clearPage("Search");
+}
+
+void MainWindow::clearPage(QString page)
+{
+    qDebug() << "Clearing Page...";
+    if (page == "Add") {
+        qDebug() << "Add";
+        ap->clearFields();
+    } else if (page == "Search") {
+        qDebug() << "Search";
+        sp->clearPage();
+    } else if (page == "Drink") {
+        qDebug() << "Drink";
+        dp->clearPage();
+    }
 }
 
 

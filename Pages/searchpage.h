@@ -14,6 +14,7 @@ class SearchPage : public QWidget
     Q_OBJECT
 public:
     SearchPage(DbManager *dbManager, QWidget *parent=0);
+    void clearPage();
     ~SearchPage();
 
     void repopulateSearch();

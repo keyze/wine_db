@@ -1,6 +1,7 @@
 #include "quicksearch.h"
 #include <QLabel>
 #include <QPushButton>
+#include <QGroupBox>
 
 QuickSearch::QuickSearch(DbManager *dbmanager, QWidget *parent) :
     QWidget(parent)
@@ -16,10 +17,15 @@ QuickSearch::QuickSearch(DbManager *dbmanager, QWidget *parent) :
 
 
 
+
+
 void QuickSearch::initialiseParams(QGridLayout *mainLayout)
 {
     QFont boxFont;
     boxFont.setPixelSize(20);
+    QVBoxLayout *topLayout = new QVBoxLayout;
+
+    QGroupBox *theBox = new QGroupBox;
 
     searchCellar = new QComboBox;
     searchColour = new QComboBox;
@@ -59,8 +65,9 @@ void QuickSearch::initialiseParams(QGridLayout *mainLayout)
     mainLayout->addWidget(searchVariety, 2, 0);
     mainLayout->addWidget(namebtn, 3, 1);
     mainLayout->addWidget(searchName, 3, 0);
-
-    setLayout(mainLayout);
+    theBox->setLayout(mainLayout);
+    topLayout->addWidget(theBox);
+    setLayout(topLayout);
 
 }
 
@@ -149,4 +156,12 @@ void QuickSearch::nameBtnPress()
 {
     QString name = searchName->currentText();
     emit sigSearchName(name);
+}
+
+void QuickSearch::clearPage()
+{
+    searchCellar->setCurrentIndex(0);
+    searchColour->setCurrentIndex(0);
+    searchName->setCurrentIndex(0);
+    searchVariety->setCurrentIndex(0);
 }

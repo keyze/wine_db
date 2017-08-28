@@ -45,6 +45,8 @@ Drink::Drink(DbManager *db, QWidget *parent) : QWidget(parent),  currentRow(0), 
     connect(view->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)), this, SLOT(onRowChanged(QModelIndex)));
 }
 
+
+
 QGridLayout* Drink::setupSearch()
 {
     QGridLayout *layout = new QGridLayout;
@@ -111,6 +113,7 @@ void Drink::onRowChanged(QModelIndex index)
     QString variety = index.sibling(row, 3).data().toString();
     QString colour = index.sibling(row, 4).data().toString();
     QString region = index.sibling(row, 5).data().toString();
+    QString location = index.sibling(row, 6).data().toString();
 
 
     drinkMap.insert("colour", colour);
@@ -119,6 +122,7 @@ void Drink::onRowChanged(QModelIndex index)
     drinkMap.insert("vintage", vintage);
     drinkMap.insert("variety", variety);
     drinkMap.insert("vineyard", vineyard);
+    drinkMap.insert("location", location);
 
 
 
@@ -126,3 +130,9 @@ void Drink::onRowChanged(QModelIndex index)
 }
 
 
+void Drink::clearPage()
+{
+    asearch->clearPage();
+    wineTable->clearTable();
+    quantityEdit->clear();
+}
