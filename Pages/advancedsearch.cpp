@@ -158,7 +158,7 @@ void AdvancedSearch::populateColour()
     QString search = "SELECT colour FROM wines";
     QStringList colourWines = db->searchQuery(search);
     colourWines.removeDuplicates();
-
+    colourWines.sort();
     colourBox->clear();
     colourBox->insertItem(0, "");
     foreach(QString s, colourWines) {
@@ -172,7 +172,7 @@ void AdvancedSearch::populateName(QString where)
     QString search = "SELECT name FROM wines " + where;
     QStringList nameWines = db->searchQuery(search);
     nameWines.removeDuplicates();
-
+    nameWines.sort();
     nameBox->clear();
     nameBox->insertItem(0, "");
     foreach(QString s, nameWines) {
@@ -186,7 +186,7 @@ void AdvancedSearch::populateVineyard(QString where)
     QString search = "Select vineyard From wines " + where;
     QStringList vineyardWines = db->searchQuery(search);
     vineyardWines.removeDuplicates();
-
+    vineyardWines.sort();
     vineyardBox->clear();
     vineyardBox->insertItem(0, "");
     foreach(QString s, vineyardWines) {
@@ -200,7 +200,7 @@ void AdvancedSearch::populateVariety(QString where)
     QString search = "SELECT variety FROM wines " + where;
     QStringList varietyWines = db->searchQuery(search);
     varietyWines.removeDuplicates();
-
+    varietyWines.sort();
     varietyBox->clear();
     varietyBox->insertItem(0, "");
     foreach(QString s, varietyWines) {
@@ -214,7 +214,7 @@ void AdvancedSearch::populateVintage(QString where)
     QString search = "Select vintage from wines " + where;
     QStringList vintageWines = db->searchQuery(search);
     vintageWines.removeDuplicates();
-
+    vintageWines.sort();
     vintageBox->clear();
     vintageBox->insertItem(0, "");
     foreach(QString s, vintageWines) {

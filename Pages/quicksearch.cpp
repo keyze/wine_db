@@ -88,10 +88,11 @@ void QuickSearch::populateColour()
     QString search = "SELECT colour FROM wines";
     QStringList colourWines = db->searchQuery(search);
     colourWines.removeDuplicates();
-
+    colourWines.sort();
     foreach(QString s, colourWines) {
         searchColour->addItem(s);
     }
+    searchColour->setCurrentIndex(2);
 }
 
 void QuickSearch::populateVariety()
@@ -99,7 +100,7 @@ void QuickSearch::populateVariety()
     QString search = "SELECT variety FROM wines";
     QStringList varietyWines = db->searchQuery(search);
     varietyWines.removeDuplicates();
-
+    varietyWines.sort();
     foreach(QString s, varietyWines) {
         searchVariety->addItem(s);
     }
@@ -110,7 +111,7 @@ void QuickSearch::populateName()
     QString search = "SELECT name FROM wines";
     QStringList nameWines = db->searchQuery(search);
     nameWines.removeDuplicates();
-
+    nameWines.sort();
     foreach(QString s, nameWines) {
         searchName->addItem(s);
     }
