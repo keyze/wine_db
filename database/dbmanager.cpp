@@ -5,7 +5,7 @@
 #include <QSqlError>
 #include <QDebug>
 
-static const QString path ="/home/adam/wine_db/wine.db";
+static const QString path ="/Applications/wine_db/wine.db";
         //"/Volumes/SUMS/wine_db/wine.db";
         // "/home/msm/wine_db/wine.db";
 
