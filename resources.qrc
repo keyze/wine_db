@@ -11,5 +11,6 @@
         <file>pictures/transparent-wine.png</file>
         <file>pictures/search.png</file>
         <file>pictures/home.png</file>
+        <file>pictures/settings.svg</file>
     </qresource>
 </RCC>

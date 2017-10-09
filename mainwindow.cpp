@@ -78,19 +78,26 @@ void MainWindow::createActions()
     QPixmap addWine(":/res/pictures/transparent-wine.png");
     QPixmap drinkWine(":/res/pictures/drink-wine-512.png");
     QPixmap searchPic(":/res/pictures/search.png");
+    QPixmap settingsPic(":/res/pictures/settings.svg");
     const QIcon homeIcon(home);
     const QIcon wineIcon(addWine);
     const QIcon drinkIcon(drinkWine);
     const QIcon searchIcon(searchPic);
+    const QIcon settingsIcon(settingsPic);
+
     goHome = new QAction(homeIcon, tr("&Home"), this);
     goAddWine = new QAction(wineIcon, tr("&Add Wine"), this);
     goDrinkWine = new QAction(drinkIcon, tr("&Drink Wine"), this);
+    settingsAct = new QAction(settingsIcon, tr("&Settings"), this);
+
     search = new QAction(searchIcon, tr("&Search"), this);
     exitAct = new QAction(tr("&Exit"), this);
     goHome->setStatusTip(tr("Go Home"));
     goAddWine->setStatusTip(tr("Add Wine"));
     goDrinkWine->setStatusTip(tr("Drink Wine"));
     search->setStatusTip(tr("Search"));
+    settingsAct->setStatusTip(tr("Settings"));
+
     connect(goHome, &QAction::triggered, this,  &MainWindow::ribbonHome);
     connect(goAddWine, &QAction::triggered, this, &MainWindow::ribbonAdd);
     connect(goDrinkWine, &QAction::triggered, this, &MainWindow::ribbonDrink);
@@ -110,6 +117,8 @@ void MainWindow::createMenus()
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
 
+    editMenu = menuBar()->addMenu(tr("&Edit"));
+    editMenu->addAction(settingsAct);
 }
 
 
@@ -121,6 +130,8 @@ void MainWindow::createToolBar()
     myTools->addAction(goAddWine);
     myTools->addAction(search);
     myTools->addAction(goDrinkWine);
+    myTools->addSeparator();
+    myTools->addAction(settingsAct);
     myTools->setMovable(false);
 }
 
