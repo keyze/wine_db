@@ -132,6 +132,7 @@ void AddPage::addReds()
     redBox->addItem("Barolo");
     redBox->addItem("Cabernet");
     redBox->addItem("Cabernet Franc");
+    redBox->addItem("Cabernet Merlot");
     redBox->addItem("Cabernet Sauvignon");
     redBox->addItem("Cabernet Sauvignon Merlot");
     redBox->addItem("Cabernet Sauvignon Shiraz");
@@ -145,7 +146,7 @@ void AddPage::addReds()
     redBox->addItem("Malbec Cabernet Sauvignon");
     redBox->addItem("Merlot");
     redBox->addItem("Nebbiolo");
-    redBox->addItem("Nero d'Avoca");
+    redBox->addItem("Nero d'Avola");
     redBox->addItem("Petit Verdot");
     redBox->addItem("Pinot Noir");
     redBox->addItem("Quintet");
@@ -157,7 +158,7 @@ void AddPage::addReds()
     redBox->addItem("Syrah");
     redBox->addItem("Tempranillo");  
     redBox->addItem("Volnay");
-    redBox->addItem("Xino Mavro")
+    redBox->addItem("Xino Mavro");
 
 }
 
