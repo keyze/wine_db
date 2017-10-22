@@ -30,10 +30,11 @@ private slots:
 
 private:
     QSqlQueryModel *initialiseModel();
-    QTableView *createView(const QString &title, QSqlQueryModel *sqlModel);
+
 
     QuickSearch* qsearch;
     AdvancedSearch* asearch;
+    QTableView* view;
     QSqlQueryModel* model;
 
 };

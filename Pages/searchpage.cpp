@@ -32,11 +32,11 @@ SearchPage::SearchPage(DbManager *dbManager, QWidget *parent) :
     QFont viewFont;
     viewFont.setPixelSize(20);
 
-    QTableView *view = new QTableView;
+    view = new QTableView;
     view->setModel(model);
     view->setFont(viewFont);
 
-    view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+   // view->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 
     searchLayout->addWidget(searchTab);
@@ -70,14 +70,6 @@ QSqlQueryModel* SearchPage::initialiseModel()
     return sqlModel;
 }
 
-QTableView* SearchPage::createView(const QString &title, QSqlQueryModel *sqlModel)
-{
-    QTableView *view = new QTableView;
-    view->setModel(sqlModel);
-    view->setWindowTitle(title);
-    return view;
-}
-
 void SearchPage::searchDatabase(QString query)
 {
     qDebug() << query;
@@ -90,6 +82,8 @@ void SearchPage::searchDatabase(QString query)
     model->setHeaderData(5, Qt::Horizontal, QObject::tr("Region"));
     model->setHeaderData(6, Qt::Horizontal, QObject::tr("Cellar"));
     model->setHeaderData(7, Qt::Horizontal, QObject::tr("Quantity"));
+
+    view->resizeColumnsToContents();
 
 
 }

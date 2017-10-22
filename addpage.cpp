@@ -125,25 +125,39 @@ void AddPage::addReds()
 
     redBox->setFont(redFont);
     redBox->insertItem(0, "");
+    redBox->addItem("Areni Noir");
     redBox->addItem("Ballinderry");
     redBox->addItem("Barbera");
     redBox->addItem("Bordeaux");
+    redBox->addItem("Barolo");
+    redBox->addItem("Cabernet");
     redBox->addItem("Cabernet Franc");
     redBox->addItem("Cabernet Sauvignon");
+    redBox->addItem("Cabernet Sauvignon Merlot");
+    redBox->addItem("Cabernet Sauvignon Shiraz");
     redBox->addItem("Ceoltoiri");
+    redBox->addItem("Frappato di Vittoria");
+    redBox->addItem("Feteasca Neagra");
     redBox->addItem("Grenache");
+    redBox->addItem("Grenache Shiraz");
+    redBox->addItem("G.S.M");
     redBox->addItem("Malbec");
+    redBox->addItem("Malbec Cabernet Sauvignon");
     redBox->addItem("Merlot");
     redBox->addItem("Nebbiolo");
+    redBox->addItem("Nero d'Avoca");
     redBox->addItem("Petit Verdot");
     redBox->addItem("Pinot Noir");
     redBox->addItem("Quintet");
     redBox->addItem("Sangiovese");
+    redBox->addItem("Saperavi");
     redBox->addItem("Shiraz");
+    redBox->addItem("Shiraz Cabernet");
     redBox->addItem("Shiraz Viognier");
     redBox->addItem("Syrah");
     redBox->addItem("Tempranillo");  
     redBox->addItem("Volnay");
+    redBox->addItem("Xino Mavro")
 
 }
 
@@ -225,11 +239,35 @@ QGroupBox *AddPage::addWineParameters()
 
     locationEdit = new QComboBox;
     locationEdit->insertItem(0, "");
-    locationEdit->addItem("Work Cellar");
-    locationEdit->addItem("Home Cellar: Top Shelf");
-    locationEdit->addItem("Home Cellar: Second Shelf");
-    locationEdit->addItem("Home Cellar: Third Shelf");
-    locationEdit->addItem("Home Cellar: Bottom Shelf");
+    locationEdit->addItem("Work Shelf 1");
+    locationEdit->addItem("Work Shelf 2");
+    locationEdit->addItem("Work Shelf 3");
+    locationEdit->addItem("Work Shelf 4");
+    locationEdit->addItem("Work Shelf 5");
+    locationEdit->addItem("Work Shelf 6");
+    locationEdit->addItem("Work Shelf 7");
+    locationEdit->addItem("Work Shelf 8");
+    locationEdit->addItem("Adams Shelf 1");
+    locationEdit->addItem("Adams Shelf 2");
+    locationEdit->addItem("Adams Shelf 3");
+    locationEdit->addItem("Adams Shelf 4");
+    locationEdit->addItem("Johnny Vintec Shelf 1");
+    locationEdit->addItem("Johnny Vintec Shelf 2");
+    locationEdit->addItem("Johnny Vintec Shelf 3");
+    locationEdit->addItem("Johnny Vintec Shelf 4");
+    locationEdit->addItem("Johnny Vintec Shelf 5");
+    locationEdit->addItem("Johnny Vintec Shelf 6");
+    locationEdit->addItem("Johnny Vintec Shelf 7");
+    locationEdit->addItem("Johnny Vintec Shelf 8");
+    locationEdit->addItem("Johnny Vintec Shelf 9");
+    locationEdit->addItem("Johnny Vintec Shelf 10");
+    locationEdit->addItem("Johnny Vintec Shelf 11");
+    locationEdit->addItem("Johnny White Shelf 1");
+    locationEdit->addItem("Johnny White Shelf 2");
+    locationEdit->addItem("Johnny White Shelf 3");
+    locationEdit->addItem("Johnny White Shelf 4");
+    locationEdit->addItem("Johnny White Shelf 5");
+
 
     QLabel *nameLabel = new QLabel(tr("Name of Wine:"));
     nameLabel->setFont(paramFont);
