@@ -52,12 +52,15 @@ private:
 
     QStackedWidget *pagesWidget;
     QMenu *fileMenu;
+    QMenu *editMenu;
+
 
     QAction* goHome;
     QAction* goAddWine;
     QAction* goDrinkWine;
     QAction* search;
     QAction* exitAct;
+    QAction* settingsAct;
 
 };
 
